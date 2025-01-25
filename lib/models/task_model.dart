@@ -7,7 +7,7 @@ class Task {
     this.isCompleted = false,
   });
 
-  void completeTask() {
-    isCompleted = true;
+  void isDone() {
+    isCompleted = !isCompleted;
   }
 }

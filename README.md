@@ -1,3 +1,4 @@
+TODO - Refine this read me lol
 # pyramids
 
 A new Flutter project.
@@ -23,6 +24,7 @@ intalling android studio: https://developer.android.com/studio/install#windows
 adding vs code flutter extension
 installing flutter: https://docs.flutter.dev/get-started/install/windows/mobile
 installing dart sdks
+installing other dependencies
 setting path
 creating template project file pyramids
 turned template into basic todo list
@@ -57,3 +59,10 @@ Reward users for completing tasks on consecutive days. Display a streak counter 
 4. Unlockable Features:
 
 Allow users to unlock new features, themes, or customizations as they level up or earn enough points.
+
+resources used:
+https://www.appicon.co/
+https://www.youtube.com/watch?v=QG9bw4rWqrg&list=LL&index=12&ab_channel=FlutterMapp
+https://www.youtube.com/watch?v=DVGYddFaLv0&ab_channel=Flutter
+https://www.youtube.com/watch?v=3kaGC_DrUnw&t=16382s&ab_channel=FlutterMapp
+https://www.youtube.com/watch?v=b1Loe5q_Zpc&ab_channel=TechWithOtabek

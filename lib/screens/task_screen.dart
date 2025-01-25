@@ -24,6 +24,16 @@ class TaskScreen extends StatelessWidget {
           itemBuilder: (BuildContext context, index) {
             return ListTile(
               title: Text(task.tasks[index].title),
+              trailing: Wrap(
+                children: [
+                  Checkbox(
+                    value: task.tasks[index].isCompleted,
+                    onChanged: (_) {
+                      context.read<SaveTask>().checkTask(index);
+                    },
+                  ),
+                ],
+              ),
             );
           },
         );

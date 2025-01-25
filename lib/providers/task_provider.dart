@@ -12,7 +12,7 @@ class TaskProvider with ChangeNotifier {
   }
 
   void completeTask(Task task) {
-    task.completeTask();
+    task.isDone();
     notifyListeners();
   }
 }
