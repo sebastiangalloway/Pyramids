@@ -33,9 +33,12 @@ class _MainHomeScreenState extends State<MainHomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      /*
+      //TODO replace with something useful like energy, level, or goal of the day banner
       appBar: AppBar(
         title: const Text('Pyramids'),
       ),
+      */
       body: widgetOptions.elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
         showSelectedLabels: true,
