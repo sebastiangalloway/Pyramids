@@ -26,11 +26,22 @@ class TaskScreen extends StatelessWidget {
               title: Text(task.tasks[index].title),
               trailing: Wrap(
                 children: [
+                  //TODO remove tasks and add task to history of tasks completed and credit rewards or exp
                   Checkbox(
                     value: task.tasks[index].isCompleted,
                     onChanged: (_) {
                       context.read<SaveTask>().checkTask(index);
                     },
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      context.read<SaveTask>().removeTask(
+                            task.tasks[index],
+                          );
+                    },
+                    icon: const Icon(
+                      Icons.delete,
+                    ),
                   ),
                 ],
               ),

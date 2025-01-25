@@ -14,6 +14,11 @@ class SaveTask extends ChangeNotifier {
     notifyListeners();
   }
 
+  void removeTask(Task task) {
+    tasks.remove(task);
+    notifyListeners();
+  }
+
   void checkTask(int index) {
     tasks[index].isDone();
     notifyListeners();
