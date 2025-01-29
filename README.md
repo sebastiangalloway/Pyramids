@@ -1,44 +1,11 @@
 TODO - Refine this read me lol
 # pyramids
 
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-
-dev process:
-came up with idea with concepts from therapy
-did chat gpt prompts
-installing git: https://gitforwindows.org/
-intalling android studio: https://developer.android.com/studio/install#windows
-adding vs code flutter extension
-installing flutter: https://docs.flutter.dev/get-started/install/windows/mobile
-installing dart sdks
-installing other dependencies
-setting path
-creating template project file pyramids
-turned template into basic todo list
-created task class
-created basic pyramid visualizer
-added a completed tab
-shifted pyramid to completed tab
-
-
 ###
 # **Pyramids**
-- I want to make my own iOS app called pyramids
-- it would be a self care app that visualizes complex tasks in the form of built pyramids
-- Look into some self care strategies that can be gamified and coded
+- I wanted to make my own iOS app called pyramids and was inspired by the app Finch
+- It would be a self care app that visualizes complex tasks in the form of built pyramids
+- The goal was to look into some self care strategies that can be gamified and coded
 - Completed tasks or efforts would lead to adding bricks to a daily, weekly, monthly, yearly, and or journey/monument/shrine based pyramid
 - Bricks would be sized based on personal difficulty
 - Bricks suggestions will be created based on previously completed tasks
