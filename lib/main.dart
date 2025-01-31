@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'models/save_task_model.dart';
 import 'screens/task_screen.dart';
+import 'screens/settings_screen.dart';
 import 'screens/add_task_screen.dart';
-
 
 import 'main_home_screen.dart';
 
@@ -22,12 +22,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
+      //TODO set boolean to false once done with app
+      debugShowCheckedModeBanner: true,
       home: MainHomeScreen(),
       theme: ThemeData(
         //TODO add dark/light mode toggle to settings
-        brightness: Brightness.dark,
+        brightness: Brightness.light,
+        //brightness: SettingsScreen().themeSetting,
       ),
+
       initialRoute: '/',
       routes: {
         '/task-screen': (_) => const TaskScreen(),

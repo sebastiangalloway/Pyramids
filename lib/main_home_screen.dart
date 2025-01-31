@@ -7,6 +7,7 @@ import 'screens/progress_screen.dart';
 import 'screens/battlefield_screen.dart';
 import 'screens/settings_screen.dart';
 
+//TODO change naming to navigation bar to make function clearer
 class MainHomeScreen extends StatefulWidget {
   @override
   _MainHomeScreenState createState() => _MainHomeScreenState();
@@ -15,13 +16,12 @@ class MainHomeScreen extends StatefulWidget {
 class _MainHomeScreenState extends State<MainHomeScreen> {
   int _selectedIndex = 0;
 
-  final List<Widget> widgetOptions = const [
+  final List<Widget> widgetOptions =  [
     HomeScreen(),
     TaskScreen(),
     BattlefieldScreen(),
     MindfulnessScreen(),
     ProgressScreen(),
-    SettingsScreen(),
   ];
 
   void _onItemTapped(int index) {
@@ -33,12 +33,19 @@ class _MainHomeScreenState extends State<MainHomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+          title: Text('Pyramids', style: TextStyle(fontSize: 24)),
+      ),
+      drawer: Drawer(
+        child: SettingsScreen(),
+      ),
       /*
       //TODO replace with something useful like energy, level, or goal of the day banner
       appBar: AppBar(
         title: const Text('Pyramids'),
       ),
       */
+      //backgroundColor: SettingsScreen().colorSetting,
       body: widgetOptions.elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
         showSelectedLabels: true,
@@ -66,10 +73,6 @@ class _MainHomeScreenState extends State<MainHomeScreen> {
           BottomNavigationBarItem(
             icon: Icon(Icons.trending_up),
             label: 'Progress',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: 'Settings',
           ),
         ],
         currentIndex: _selectedIndex,
