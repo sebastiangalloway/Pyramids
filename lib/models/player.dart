@@ -3,12 +3,13 @@ class Player {
   int level;
   int coins;
 
+  //TODO add traits, powerups, skins, etc
   Player({this.xp = 0, this.level = 1, this.coins = 0});
 
   void addXp(int amount) {
     xp += amount;
     if (xp >= level * 100) {
-      // Level up every 100 XP
+      // Level up every 100 XP 
       xp -= level * 100;
       level++;
     }

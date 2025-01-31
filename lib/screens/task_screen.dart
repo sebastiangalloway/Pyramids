@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '/models/save_task_model.dart';
+import 'settings_screen.dart';
 
 class TaskScreen extends StatelessWidget {
   const TaskScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    //TODO coloring of this scaffold isnt consistent with main_home_screens
     return Scaffold(
+      //backgroundColor: SettingsScreen().colorSetting,
       appBar: AppBar(
         title: const Text('Todo List'),
       ),

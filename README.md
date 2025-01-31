@@ -28,6 +28,8 @@ Reward users for completing tasks on consecutive days. Display a streak counter 
 Allow users to unlock new features, themes, or customizations as they level up or earn enough points.
 
 resources used:
+https://www.youtube.com/watch?v=1xipg02Wu8s&ab_channel=Fireship
+https://docs.flutter.dev/ui/widgets/material
 https://www.appicon.co/
 https://www.youtube.com/watch?v=QG9bw4rWqrg&list=LL&index=12&ab_channel=FlutterMapp
 https://www.youtube.com/watch?v=DVGYddFaLv0&ab_channel=Flutter
