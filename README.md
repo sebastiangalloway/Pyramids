@@ -1,6 +1,4 @@
-TODO - Refine this read me lol
-# pyramids
-
+TODO - Refine this read me
 ###
 # **Pyramids**
 - I wanted to make my own iOS app called pyramids and was inspired by the app Finch
