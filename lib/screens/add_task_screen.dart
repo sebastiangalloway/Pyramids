@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '/models/save_task_model.dart';
-import '/models/task_model.dart';
+import '../models/saved_task.dart';
+import '../models/task.dart';
 
 class AddTask extends StatelessWidget {
   AddTask({super.key});

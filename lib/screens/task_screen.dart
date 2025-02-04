@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '/models/save_task_model.dart';
+import '../models/saved_task.dart';
 import 'settings_screen.dart';
 
 class TaskScreen extends StatelessWidget {

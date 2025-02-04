@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'task_model.dart';
+import 'task.dart';
 
 class SaveTask extends ChangeNotifier {
   List<Task> _tasks = [
