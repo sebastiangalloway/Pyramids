@@ -38,6 +38,7 @@ class _MainHomeScreenState extends State<MainHomeScreen> {
       ),
       drawer: Drawer(
         child: SettingsScreen(),
+        width: MediaQuery.of(context).size.width,   // Gives the width,
       ),
       /*
       //TODO replace with something useful like energy, level, or goal of the day banner
