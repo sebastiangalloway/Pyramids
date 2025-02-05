@@ -69,10 +69,10 @@ Task _taskDeserialize(
   Map<Type, List<int>> allOffsets,
 ) {
   final object = Task(
+    isCompleted: reader.readBoolOrNull(offsets[0]) ?? false,
     title: reader.readString(offsets[1]),
   );
   object.id = id;
-  object.isCompleted = reader.readBool(offsets[0]);
   return object;
 }
 
@@ -84,7 +84,7 @@ P _taskDeserializeProp<P>(
 ) {
   switch (propertyId) {
     case 0:
-      return (reader.readBool(offset)) as P;
+      return (reader.readBoolOrNull(offset) ?? false) as P;
     case 1:
       return (reader.readString(offset)) as P;
     default:

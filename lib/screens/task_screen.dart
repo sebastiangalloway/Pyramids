@@ -107,7 +107,7 @@ class _TaskScreenState extends State<TaskScreen> {
             title: Text(task.title),
             trailing: Wrap(
               children: [
-                //TODO remove tasks and add task to history of tasks completed and credit rewards or exp
+                //TODO remove tasks and add completed tasks to history of tasks completed and credit rewards or exp
                 Checkbox(
                   value: task.isCompleted,
                   onChanged: (_) {

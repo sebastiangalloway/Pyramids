@@ -13,7 +13,7 @@ class Task {
     this.isCompleted = false,
   });
 
-  void isDone() {
+  void toggleCompletion() {
     isCompleted = !isCompleted;
   }
 }

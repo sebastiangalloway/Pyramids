@@ -6,7 +6,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Center(
-      //
+      //TODO Add background image
       child: Text('Home Screen', textAlign: TextAlign.center, style: TextStyle(fontSize: 24, decoration: TextDecoration.none)),
     );
   }
