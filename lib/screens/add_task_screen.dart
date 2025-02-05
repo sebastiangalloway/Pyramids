@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../models/saved_task.dart';
-import '../models/task.dart';
+import '../models/task_database.dart';
 
 class AddTask extends StatelessWidget {
   AddTask({super.key});
 
   final controller = TextEditingController();
-
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Add Task'),
+        title: const Text('Task Editor'),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -29,11 +28,7 @@ class AddTask extends StatelessWidget {
             const SizedBox(height: 15),
             ElevatedButton(
               onPressed: () {
-                context.read<SaveTask>().addTask(
-                      Task(
-                        title: controller.text,
-                      ),
-                    );
+                context.read<TaskDatabase>().addTask(controller.text,);
                 controller.clear();
                 Navigator.of(context).pop();
               },
@@ -51,3 +46,4 @@ class AddTask extends StatelessWidget {
     );
   }
 }
+

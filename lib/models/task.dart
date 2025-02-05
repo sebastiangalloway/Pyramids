@@ -10,6 +10,7 @@ class Task {
 
   Task({
     required this.title,
+    this.isCompleted = false,
   });
 
   void isDone() {

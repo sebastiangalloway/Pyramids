@@ -43,7 +43,7 @@ class TaskDatabase extends ChangeNotifier {
   }
 
   //update
-  Future<void> updateTask(int id, String newTitle) async {
+  Future<void> editTask(int id, String newTitle) async {
     final existingTask = await isar.tasks.get(id);
     if (existingTask != null) {
       existingTask.title = newTitle;
@@ -54,8 +54,19 @@ class TaskDatabase extends ChangeNotifier {
     }
   }
 
+  Future<void> checkTask(int id) async {
+    final existingTask = await isar.tasks.get(id);
+    if (existingTask != null) {
+      existingTask.isCompleted = !existingTask.isCompleted;
+      await isar.writeTxn(() async {
+        isar.tasks.put(existingTask);
+      });
+      await fetchTasks();
+    }
+  }
+
   //delete
-  Future<void> deleteTasks(int id) async {
+  Future<void> deleteTask(int id) async {
     await isar.writeTxn(() async {
       isar.tasks.delete(id);
     });

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'models/saved_task.dart';
 import 'screens/task_screen.dart';
 import 'screens/add_task_screen.dart';
 import 'models/task_database.dart';
@@ -13,8 +12,7 @@ void main() async {
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => SaveTask()),
-        Provider(create: (context) => TaskDatabase()), // Non-ChangeNotifier provider
+        ChangeNotifierProvider(create: (context) => TaskDatabase()), // Non-ChangeNotifier provider
       ],
       child: const MyApp(),
     ),
