@@ -44,7 +44,7 @@ class AddTask extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.of(context).pushNamed('/add-todo-screen');
+          Navigator.pop(context);
         },
         child: const Icon(Icons.add),
       ),

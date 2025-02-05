@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../models/saved_task.dart';
-import 'settings_screen.dart';
 
 class TaskScreen extends StatelessWidget {
   const TaskScreen({super.key});
@@ -39,8 +38,8 @@ class TaskScreen extends StatelessWidget {
                   IconButton(
                     onPressed: () {
                       context.read<SaveTask>().removeTask(
-                            task.tasks[index],
-                          );
+                        task.tasks[index],
+                      );
                     },
                     icon: const Icon(
                       Icons.delete,

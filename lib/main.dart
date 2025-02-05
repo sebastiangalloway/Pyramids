@@ -2,15 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'models/saved_task.dart';
 import 'screens/task_screen.dart';
-import 'screens/settings_screen.dart';
 import 'screens/add_task_screen.dart';
-
+import 'models/task_database.dart';
 import 'main_home_screen.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await TaskDatabase.initialize();
+
   runApp(
-    ChangeNotifierProvider(
-      create: (context) => SaveTask(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => SaveTask()),
+        Provider(create: (context) => TaskDatabase()), // Non-ChangeNotifier provider
+      ],
       child: const MyApp(),
     ),
   );

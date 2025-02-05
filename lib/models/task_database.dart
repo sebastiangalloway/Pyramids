@@ -1,8 +1,9 @@
+import 'package:flutter/material.dart';
 import 'package:isar/isar.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pyramids/models/task.dart';
 
-class NoteDatabase {
+class TaskDatabase extends ChangeNotifier {
   static late Isar isar;
 
   //init
@@ -36,6 +37,9 @@ class NoteDatabase {
     List<Task> fetchedTasks = await isar.tasks.where().findAll();
     currentTasks.clear();
     currentTasks.addAll(fetchedTasks);
+
+    //update
+    notifyListeners();
   }
 
   //update
