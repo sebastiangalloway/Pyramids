@@ -75,7 +75,6 @@ Mark tasks as complete by replacing `[ ]` with `[x]`.
 - [ ] Ensure **.gitignore** includes necessary files
 - [ ] Reach out to neurodivergent individuals for feedback
 - [ ] Implement **actual settings functionality**:
-  - [ ] Add **Theme Toggle** (Light/Dark mode)
   - [ ] Add **Notifications Toggle** (Enable/Disable Reminders)
   - [ ] Add **Account Preferences** section
 
@@ -92,6 +91,7 @@ Mark tasks as complete by replacing `[ ]` with `[x]`.
 - [x] Created **initial settings page UI**
 - [x] Move **Source Code Link** to the About section (or remove)
 - [x] Improve **About Creator** section
+- [x] Add **Theme Toggle** (Light/Dark mode)
 
 
 

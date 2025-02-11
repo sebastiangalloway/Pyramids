@@ -104,7 +104,7 @@ class _SettingsScreen extends State<SettingsScreen> {
               ),
               Divider(height: 20, thickness: 1),
               SizedBox(height: 10),
-              buildAccountOption(context, "Face ID"),
+              buildToggleOption("Face ID", notification_1, onChangeFunction1),
               buildAccountOption(context, "Preferences"),
               buildAccountOption(context, "Language"),
               buildAccountOption(context, "Privacy and Security"),
@@ -141,11 +141,11 @@ class _SettingsScreen extends State<SettingsScreen> {
               buildToggleOption(
                 "All On / Off", notification_2, onChangeFunction2),
               buildToggleOption(
-                "Task Reminder Notifications", notification_3, onChangeFunction3),
+                "Task Reminders", notification_3, onChangeFunction3),
               buildToggleOption(
-                "Mindfulness Notifications", notification_4, onChangeFunction4),
+                "Mindfulness Reminders", notification_4, onChangeFunction4),
               buildToggleOption(
-                "Encouragement Notifications", notification_5, onChangeFunction5),
+                "Encouragements", notification_5, onChangeFunction5),
               SizedBox(height: 30),
                             Row(
                 children: [

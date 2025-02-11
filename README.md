@@ -38,6 +38,7 @@
 - [State Management](https://www.youtube.com/watch?v=DVGYddFaLv0)
 - [Flutter Database with ISAR](https://www.youtube.com/watch?v=b1Loe5q_Zpc)
 - [Best Flutter Practices](https://www.youtube.com/watch?v=FnXg0NK6hb8)
+- [Flutter Shared Preferences](https://pub.dev/packages/shared_preferences)
 
 ### 📺 Helpful Video Guides
 - TODO make video on using application
