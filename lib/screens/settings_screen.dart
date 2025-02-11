@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -46,6 +47,25 @@ class _SettingsScreen extends State<SettingsScreen> {
     });
   }
 
+  Future<void> _launchURL1() async {
+    final Uri url = Uri.parse(
+        'https://github.com/sebastiangalloway/Pyramids'); // Replace with your actual link
+    if (await canLaunchUrl(url)) {
+      await launchUrl(url, mode: LaunchMode.externalApplication);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+  Future<void> _launchURL2() async {
+    final Uri url = Uri.parse(
+        'https://sgalloway.net'); // Replace with your actual link
+    if (await canLaunchUrl(url)) {
+      await launchUrl(url, mode: LaunchMode.externalApplication);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,7 +86,7 @@ class _SettingsScreen extends State<SettingsScreen> {
           padding: const EdgeInsets.all(10),
           child: ListView(
             children: [
-              SizedBox(height: 40),
+              SizedBox(height: 30),
               Row(
                 children: [
                   Icon(
@@ -85,8 +105,7 @@ class _SettingsScreen extends State<SettingsScreen> {
               buildAccountOption(context, "Preferences"),
               buildAccountOption(context, "Language"),
               buildAccountOption(context, "Privacy and Security"),
-              buildAccountOption(context, "About"),
-              SizedBox(height: 40),
+              SizedBox(height: 30),
               Row(
                 children: [
                   Icon(Icons.volume_up_outlined, color: Colors.blue),
@@ -101,7 +120,7 @@ class _SettingsScreen extends State<SettingsScreen> {
               buildNotificationOptions(
                   "Theme Toggle", notification_1, onChangeFunction1),
               buildAccountOption(context, "Font Size"),
-              SizedBox(height: 40),
+              SizedBox(height: 30),
               Row(
                 children: [
                   Icon(Icons.volume_up_outlined, color: Colors.blue),
@@ -121,7 +140,42 @@ class _SettingsScreen extends State<SettingsScreen> {
                 "Mindfulness Notifications", notification_4, onChangeFunction4),
               buildNotificationOptions(
                 "Encouragement Notifications", notification_5, onChangeFunction5),
-              SizedBox(height: 40),
+              SizedBox(height: 30),
+                            Row(
+                children: [
+                  Icon(
+                    Icons.person,
+                    color: Colors.blue,
+                  ),
+                  SizedBox(width: 10),
+                  Text("Extras",
+                      style:
+                          TextStyle(fontSize: 22, fontWeight: FontWeight.bold))
+                ],
+              ),
+              Divider(height: 20, thickness: 1),
+              SizedBox(height: 10),
+              ListTile(
+                leading: Icon(Icons.info),
+                title: Text('About',
+                    style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.grey[600])),
+
+                onTap: _launchURL1, // Call the function when tapped
+              ),
+              ListTile(
+                leading: Icon(Icons.info),
+                title: Text('Meet the Developer',
+                    style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.grey[600])),
+
+                onTap: _launchURL2, // Call the function when tapped
+              ),
+              SizedBox(height: 30),
               Center(
                 child: OutlinedButton(
                   style: OutlinedButton.styleFrom(
@@ -170,7 +224,7 @@ class _SettingsScreen extends State<SettingsScreen> {
         ));
   }
 
-  GestureDetector buildAccountOption(BuildContext context, String title) {
+  GestureDetector buildAccountOption(BuildContext context, String title, {VoidCallback? onTap}) {
     return GestureDetector(
       onTap: () {
         showDialog(
@@ -196,10 +250,11 @@ class _SettingsScreen extends State<SettingsScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(title,
-                  style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.grey[600])),
+                style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.grey[600])
+              ),
               Icon(Icons.arrow_forward_ios, color: Colors.grey)
             ],
           )),

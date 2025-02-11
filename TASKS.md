@@ -66,13 +66,11 @@ Mark tasks as complete by replacing `[ ]` with `[x]`.
   - [ ] Add **Cloud Sync (iCloud/Google Drive Backup - Future)**
   - [ ] Implement **Clear App Data** option (resets progress, settings, and tasks)
 - [ ] **About & Miscellaneous**
-  - [ ] Improve **About Creator** section
   - [ ] Add **Feedback & Support** section
 
 ---
 
 ## 🚧 In Progress
-  - [ ] Move **Source Code Link** to the About section (or remove)
 - [ ] Review **TODOs** in code
 - [ ] Ensure **.gitignore** includes necessary files
 - [ ] Reach out to neurodivergent individuals for feedback
@@ -92,6 +90,10 @@ Mark tasks as complete by replacing `[ ]` with `[x]`.
 - [x] Open project where I left off on Windows
 - [x] Implement **database for task storage between app usage**
 - [x] Created **initial settings page UI**
+- [x] Move **Source Code Link** to the About section (or remove)
+- [x] Improve **About Creator** section
+
+
 
 ---
 
