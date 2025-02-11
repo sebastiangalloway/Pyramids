@@ -5,13 +5,21 @@ import '../providers/theme_provider.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
-  //final colorSetting = Colors.white;
-  //final themeSetting = brightness.dark,
+
   @override
   _SettingsScreen createState() => _SettingsScreen();
 }
 
 class _SettingsScreen extends State<SettingsScreen> {
+  List<Color> colors = [
+    Colors.red,
+    Colors.orange,
+    Colors.yellow,
+    Colors.green,
+    Colors.blue,
+    Colors.indigo,
+    Colors.purple,
+  ];
   bool notification_1 = false;
   bool notification_2 = false;
   bool notification_3 = false;
@@ -70,7 +78,7 @@ class _SettingsScreen extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context); // ✅ Get instance
-    bool isDarkMode = themeProvider.themeMode == ThemeMode.dark;
+    Color borderColor = themeProvider.isDarkMode ? Colors.white : Colors.black;
 
     return Scaffold(
       appBar: AppBar(
@@ -94,7 +102,7 @@ class _SettingsScreen extends State<SettingsScreen> {
                 children: [
                   Icon(
                     Icons.person,
-                    color: Colors.purple[800],
+                    color: themeProvider.accentColor,
                   ),
                   SizedBox(width: 10),
                   Text("Account",
@@ -111,7 +119,10 @@ class _SettingsScreen extends State<SettingsScreen> {
               SizedBox(height: 30),
               Row(
                 children: [
-                  Icon(Icons.palette, color: Colors.purple[800]),
+                  Icon(
+                    Icons.palette,
+                    color: themeProvider.accentColor,
+                  ),
                   SizedBox(width: 10),
                   Text("Appearance",
                       style:
@@ -120,16 +131,50 @@ class _SettingsScreen extends State<SettingsScreen> {
               ),
               Divider(height: 20, thickness: 1),
               SizedBox(height: 10),
-              buildToggleOption("Theme Toggle", isDarkMode, (value) {
-                setState(() {
-                  themeProvider.toggleTheme(value);
-                });
-              }),
+              buildToggleOption("Theme Toggle", themeProvider.isDarkMode, (value) {
+                  themeProvider.toggleDarkMode();
+                },
+              ),
               buildAccountOption(context, "Font Size"),
+              const Padding(
+                padding: EdgeInsets.all(16.0),
+                child: Text("Select Accent Color:",
+                    style: TextStyle(fontSize: 20)),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: Wrap(
+                  spacing: 10,
+                  children: colors.map((color) {
+                    return GestureDetector(
+                      onTap: () {
+                        themeProvider.setAccentColor(color);
+                      },
+                      child: Container(
+                        width: 40,
+                        height: 40,
+                        decoration: BoxDecoration(
+                          color: color,
+                          shape: BoxShape.circle,
+                          border: Border.all(
+                            color: themeProvider.accentColor == color
+                                ? borderColor
+                                : Colors.transparent,
+                            width: 3,
+                          ),
+                        ),
+                      ),
+                    );
+                  }).toList(),
+                ),
+              ),
               SizedBox(height: 30),
               Row(
                 children: [
-                  Icon(Icons.volume_up_outlined, color: Colors.purple[800]),
+                  Icon(
+                    Icons.volume_up_outlined,
+                    color: themeProvider.accentColor,
+                  ),
                   SizedBox(width: 10),
                   Text("Notifications",
                       style:
@@ -151,7 +196,7 @@ class _SettingsScreen extends State<SettingsScreen> {
                 children: [
                   Icon(
                     Icons.person,
-                    color: Colors.purple[800],
+                    color: themeProvider.accentColor,
                   ),
                   SizedBox(width: 10),
                   Text("Extras",
@@ -166,8 +211,7 @@ class _SettingsScreen extends State<SettingsScreen> {
                 title: Text('About',
                     style: TextStyle(
                         fontSize: 20,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.grey[600])),
+                        fontWeight: FontWeight.w500)),
 
                 onTap: _launchURL1, // Call the function when tapped
               ),
@@ -176,8 +220,7 @@ class _SettingsScreen extends State<SettingsScreen> {
                 title: Text('Meet the Developer',
                     style: TextStyle(
                         fontSize: 20,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.grey[600])),
+                        fontWeight: FontWeight.w500)),
 
                 onTap: _launchURL2, // Call the function when tapped
               ),
@@ -214,7 +257,6 @@ Widget buildToggleOption(String title, bool value, void Function(bool) onChangeM
     ),
     trailing: Switch(
       value: value,
-      activeColor: Colors.purple[800],
       onChanged: (bool newValue) {
         onChangeMethod(newValue); // ✅ Calls the provided function
       },

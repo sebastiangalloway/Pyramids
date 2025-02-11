@@ -33,10 +33,35 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       //TODO set boolean to false once done with app
       debugShowCheckedModeBanner: true,
+      theme: ThemeData(
+        brightness: Brightness.light,
+        primaryColor: themeProvider.accentColor,
+        colorScheme: ColorScheme.light(
+          primary: themeProvider.accentColor,
+          secondary: themeProvider.accentColor,
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: themeProvider.accentColor,
+          ),
+        ),
+      ),
+      darkTheme: ThemeData(
+        brightness: Brightness.dark,
+        primaryColor: themeProvider.accentColor,
+        colorScheme: ColorScheme.dark(
+          primary: themeProvider.accentColor,
+          secondary: themeProvider.accentColor,
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: themeProvider.accentColor,
+          ),
+        ),
+      ),
+      themeMode: themeProvider.isDarkMode ? ThemeMode.dark : ThemeMode.light,
       home: MainHomeScreen(),
-      themeMode: themeProvider.themeMode, // ✅ Use the provider
-      theme: ThemeData.light(),
-      darkTheme: ThemeData.dark(),
+
 
       initialRoute: '/',
       routes: {
