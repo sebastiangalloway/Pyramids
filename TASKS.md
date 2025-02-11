@@ -8,7 +8,7 @@ Mark tasks as complete by replacing `[ ]` with `[x]`.
 ## 📝 To-Do (Backlog)
 ### 🚀 Core Features
 - [ ] Implement AI Task Chunker:
-  - [ ] User inserts a to-do item
+  - [x] User inserts a to-do item
   - [ ] User selects option to break down task
   - [ ] AI generates **up to 5** actionable steps
 - [ ] Add emotion logger (track dates/times/emotional states)
@@ -20,6 +20,7 @@ Mark tasks as complete by replacing `[ ]` with `[x]`.
 - [ ] Implement procrastination checker & alerts
 - [ ] Add bilateral beats feature
 - [ ] Implement bilateral beats + Pomodoro timer
+- [ ] Make video on using application and add to README
 
 ### 🎮 Gamification & Battlefield
 - [ ] Connect to-do list with **Battlefield Mode**
@@ -31,10 +32,8 @@ Mark tasks as complete by replacing `[ ]` with `[x]`.
 - [ ] Mindfulness & exercises grant **powers** (e.g., extend timers, boost XP)
 
 ### 🛠️ App Functionality
-- [ ] Implement **actual settings functionality** (theme toggles, notifications, preferences)
 - [ ] Limit max **tasks (10-20) at a time** to reduce overwhelm (increase with player level)
 - [ ] Implement **task prioritization system**
-- [ ] Add **task storage database** for persistence
 - [ ] Task initiation feature (togglable option)
 - [ ] Implement Pomodoro Timer
 
@@ -46,13 +45,41 @@ Mark tasks as complete by replacing `[ ]` with `[x]`.
   - [ ] Track user activity trends over time
   - [ ] Display achievements & rewards
 
+## ⚙️ Settings Page Improvements
+### 🚀 To-Do (Planned Features)
+- [ ] **Theme & Appearance**
+  - [ ] Add **Light/Dark/System Mode** toggle
+  - [ ] Add **Font Size Adjustment** (Small, Medium, Large)
+  - [ ] Allow **App Icon Customization** (if supported by iOS)
+- [ ] **Notifications & Reminders**
+  - [ ] Add **Daily Task Reminder** toggle
+  - [ ] Add **Mindfulness Alerts** (breathing, journaling, relaxation prompts)
+  - [ ] Add **Streak Notifications** to encourage consistency
+  - [ ] Add **Global Push Notifications Toggle** (enable/disable all)
+- [ ] **Privacy & Security**
+  - [ ] Implement **Biometric Authentication (Face ID / Fingerprint)**
+  - [ ] Add **Change Email/Password** option
+  - [ ] Implement **Delete Account** functionality
+  - [ ] Improve **Privacy & Security** settings
+- [ ] **Data & Storage**
+  - [ ] Ensure settings **persist using SharedPreferences**
+  - [ ] Add **Cloud Sync (iCloud/Google Drive Backup - Future)**
+  - [ ] Implement **Clear App Data** option (resets progress, settings, and tasks)
+- [ ] **About & Miscellaneous**
+  - [ ] Improve **About Creator** section
+  - [ ] Add **Feedback & Support** section
+
 ---
 
 ## 🚧 In Progress
+  - [ ] Move **Source Code Link** to the About section (or remove)
 - [ ] Review **TODOs** in code
 - [ ] Ensure **.gitignore** includes necessary files
 - [ ] Reach out to neurodivergent individuals for feedback
-- [ ] Implement **database for task storage between app usage**
+- [ ] Implement **actual settings functionality**:
+  - [ ] Add **Theme Toggle** (Light/Dark mode)
+  - [ ] Add **Notifications Toggle** (Enable/Disable Reminders)
+  - [ ] Add **Account Preferences** section
 
 ---
 
@@ -63,6 +90,8 @@ Mark tasks as complete by replacing `[ ]` with `[x]`.
 - [x] Create layout similar to Acorns, Headspace, and TikTok
 - [x] Implement a basic to-do list
 - [x] Open project where I left off on Windows
+- [x] Implement **database for task storage between app usage**
+- [x] Created **initial settings page UI**
 
 ---
 

@@ -10,9 +10,11 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreen extends State<SettingsScreen> {
-  bool notification_1 = true;
+  bool notification_1 = false;
   bool notification_2 = false;
   bool notification_3 = false;
+  bool notification_4 = false;
+  bool notification_5 = false;
 
   onChangeFunction1(bool newValue1) {
     setState(() {
@@ -29,6 +31,18 @@ class _SettingsScreen extends State<SettingsScreen> {
   onChangeFunction3(bool newValue3) {
     setState(() {
       notification_3 = newValue3;
+    });
+  }
+
+  onChangeFunction4(bool newValue4) {
+    setState(() {
+      notification_4 = newValue4;
+    });
+  }
+
+  onChangeFunction5(bool newValue5) {
+    setState(() {
+      notification_5 = newValue5;
     });
   }
 
@@ -69,11 +83,24 @@ class _SettingsScreen extends State<SettingsScreen> {
               SizedBox(height: 10),
               buildAccountOption(context, "Face ID"),
               buildAccountOption(context, "Preferences"),
-              buildAccountOption(context, "Appearance"),
               buildAccountOption(context, "Language"),
               buildAccountOption(context, "Privacy and Security"),
-              buildAccountOption(context, "Source Code"),
-              buildAccountOption(context, "About Creator"),
+              buildAccountOption(context, "About"),
+              SizedBox(height: 40),
+              Row(
+                children: [
+                  Icon(Icons.volume_up_outlined, color: Colors.blue),
+                  SizedBox(width: 10),
+                  Text("Appearance",
+                      style:
+                          TextStyle(fontSize: 22, fontWeight: FontWeight.bold))
+                ],
+              ),
+              Divider(height: 20, thickness: 1),
+              SizedBox(height: 10),
+              buildNotificationOptions(
+                  "Theme Toggle", notification_1, onChangeFunction1),
+              buildAccountOption(context, "Font Size"),
               SizedBox(height: 40),
               Row(
                 children: [
@@ -87,12 +114,14 @@ class _SettingsScreen extends State<SettingsScreen> {
               Divider(height: 20, thickness: 1),
               SizedBox(height: 10),
               buildNotificationOptions(
-                  "Theme Toggle", notification_1, onChangeFunction1),
+                "On / Off", notification_2, onChangeFunction2),
               buildNotificationOptions(
-                  "Account Active", notification_2, onChangeFunction2),
+                "Task Notifications", notification_3, onChangeFunction3),
               buildNotificationOptions(
-                  "Some Notification", notification_3, onChangeFunction3),
-              SizedBox(height: 50),
+                "Mindfulness Notifications", notification_4, onChangeFunction4),
+              buildNotificationOptions(
+                "Encouragement Notifications", notification_5, onChangeFunction5),
+              SizedBox(height: 40),
               Center(
                 child: OutlinedButton(
                   style: OutlinedButton.styleFrom(
