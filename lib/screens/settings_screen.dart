@@ -19,6 +19,7 @@ class _SettingsScreen extends State<SettingsScreen> {
     Colors.blue,
     Colors.indigo,
     Colors.purple,
+    Colors.grey
   ];
   bool notification_1 = false;
   bool notification_2 = false;
@@ -144,7 +145,7 @@ class _SettingsScreen extends State<SettingsScreen> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: Wrap(
-                  spacing: 10,
+                  spacing: 8,
                   children: colors.map((color) {
                     return GestureDetector(
                       onTap: () {
