@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:provider/provider.dart';
+import '../providers/theme_provider.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -68,19 +70,21 @@ class _SettingsScreen extends State<SettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context); // ✅ Get instance
+    bool isDarkMode = themeProvider.themeMode == ThemeMode.dark;
+
     return Scaffold(
       appBar: AppBar(
-          title: Text('Settings Screen', style: TextStyle(fontSize: 24)),
-          leading: IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: Icon(
-                Icons.arrow_back,
-                color: Colors.black,
-              ))),
-      //backgroundColor: colorSetting,
-      //brightness: themeSetting,
+        title: Text('Settings Screen', style: TextStyle(fontSize: 24)),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(
+            Icons.arrow_back,
+          )
+        )
+      ),
 
       body: Container(
           padding: const EdgeInsets.all(10),
@@ -108,7 +112,7 @@ class _SettingsScreen extends State<SettingsScreen> {
               SizedBox(height: 30),
               Row(
                 children: [
-                  Icon(Icons.volume_up_outlined, color: Colors.blue),
+                  Icon(Icons.palette, color: Colors.blue),
                   SizedBox(width: 10),
                   Text("Appearance",
                       style:
@@ -117,8 +121,11 @@ class _SettingsScreen extends State<SettingsScreen> {
               ),
               Divider(height: 20, thickness: 1),
               SizedBox(height: 10),
-              buildNotificationOptions(
-                  "Theme Toggle", notification_1, onChangeFunction1),
+              buildToggleOption("Theme Toggle", isDarkMode, (value) {
+                setState(() {
+                  themeProvider.toggleTheme(value);
+                });
+              }),
               buildAccountOption(context, "Font Size"),
               SizedBox(height: 30),
               Row(
@@ -132,13 +139,13 @@ class _SettingsScreen extends State<SettingsScreen> {
               ),
               Divider(height: 20, thickness: 1),
               SizedBox(height: 10),
-              buildNotificationOptions(
-                "On / Off", notification_2, onChangeFunction2),
-              buildNotificationOptions(
-                "Task Notifications", notification_3, onChangeFunction3),
-              buildNotificationOptions(
+              buildToggleOption(
+                "All On / Off", notification_2, onChangeFunction2),
+              buildToggleOption(
+                "Task Reminder Notifications", notification_3, onChangeFunction3),
+              buildToggleOption(
                 "Mindfulness Notifications", notification_4, onChangeFunction4),
-              buildNotificationOptions(
+              buildToggleOption(
                 "Encouragement Notifications", notification_5, onChangeFunction5),
               SizedBox(height: 30),
                             Row(
@@ -156,7 +163,7 @@ class _SettingsScreen extends State<SettingsScreen> {
               Divider(height: 20, thickness: 1),
               SizedBox(height: 10),
               ListTile(
-                leading: Icon(Icons.info),
+                leading: Icon(Icons.public),
                 title: Text('About',
                     style: TextStyle(
                         fontSize: 20,
@@ -166,7 +173,7 @@ class _SettingsScreen extends State<SettingsScreen> {
                 onTap: _launchURL1, // Call the function when tapped
               ),
               ListTile(
-                leading: Icon(Icons.info),
+                leading: Icon(Icons.public),
                 title: Text('Meet the Developer',
                     style: TextStyle(
                         fontSize: 20,
@@ -185,10 +192,9 @@ class _SettingsScreen extends State<SettingsScreen> {
                     )
                   ),
                   onPressed: () {},
-                  child: Text("SIGN OUT", style: TextStyle(
+                  child: Text("SIGN IN/OUT", style: TextStyle(
                     fontSize: 10, 
                     letterSpacing: 2.2, 
-                    color: Colors.black
                   ),),
                 ),
               ),
@@ -199,30 +205,23 @@ class _SettingsScreen extends State<SettingsScreen> {
     );
   }
 
-  Padding buildNotificationOptions(
-      String title, bool value, Function onChangeMedthod) {
-    return Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 20),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(title,
-                style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.grey[600])),
-            Transform.scale(
-                scale: 0.7,
-                child: CupertinoSwitch(
-                    activeTrackColor: Colors.blue,
-                    inactiveThumbColor: Colors.grey,
-                    value: value,
-                    onChanged: (bool newValue) {
-                      onChangeMedthod(newValue);
-                    }))
-          ],
-        ));
-  }
+Widget buildToggleOption(String title, bool value, void Function(bool) onChangeMethod) {
+  return ListTile(
+    title: Text(title,
+      style: TextStyle(
+        fontSize: 20,
+        fontWeight: FontWeight.w500,
+      )
+    ),
+    trailing: Switch(
+      value: value,
+      activeColor: Colors.blue,
+      onChanged: (bool newValue) {
+        onChangeMethod(newValue); // ✅ Calls the provided function
+      },
+    ),
+  );
+}
 
   GestureDetector buildAccountOption(BuildContext context, String title, {VoidCallback? onTap}) {
     return GestureDetector(
