@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:provider/provider.dart';
@@ -95,7 +94,7 @@ class _SettingsScreen extends State<SettingsScreen> {
                 children: [
                   Icon(
                     Icons.person,
-                    color: Colors.blue,
+                    color: Colors.purple[800],
                   ),
                   SizedBox(width: 10),
                   Text("Account",
@@ -112,7 +111,7 @@ class _SettingsScreen extends State<SettingsScreen> {
               SizedBox(height: 30),
               Row(
                 children: [
-                  Icon(Icons.palette, color: Colors.blue),
+                  Icon(Icons.palette, color: Colors.purple[800]),
                   SizedBox(width: 10),
                   Text("Appearance",
                       style:
@@ -130,7 +129,7 @@ class _SettingsScreen extends State<SettingsScreen> {
               SizedBox(height: 30),
               Row(
                 children: [
-                  Icon(Icons.volume_up_outlined, color: Colors.blue),
+                  Icon(Icons.volume_up_outlined, color: Colors.purple[800]),
                   SizedBox(width: 10),
                   Text("Notifications",
                       style:
@@ -152,7 +151,7 @@ class _SettingsScreen extends State<SettingsScreen> {
                 children: [
                   Icon(
                     Icons.person,
-                    color: Colors.blue,
+                    color: Colors.purple[800],
                   ),
                   SizedBox(width: 10),
                   Text("Extras",
@@ -215,7 +214,7 @@ Widget buildToggleOption(String title, bool value, void Function(bool) onChangeM
     ),
     trailing: Switch(
       value: value,
-      activeColor: Colors.blue,
+      activeColor: Colors.purple[800],
       onChanged: (bool newValue) {
         onChangeMethod(newValue); // ✅ Calls the provided function
       },
@@ -252,7 +251,7 @@ Widget buildToggleOption(String title, bool value, void Function(bool) onChangeM
                 style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.w500,
-                    color: Colors.grey[600])
+                  )
               ),
               Icon(Icons.arrow_forward_ios, color: Colors.grey)
             ],

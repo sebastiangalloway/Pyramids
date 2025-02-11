@@ -52,8 +52,7 @@ class _MainHomeScreenState extends State<MainHomeScreen> {
         showSelectedLabels: true,
         showUnselectedLabels: true,
         type: BottomNavigationBarType.fixed,
-        selectedItemColor: Colors.amber,
-        unselectedItemColor: Colors.blueGrey,
+        selectedItemColor: Colors.purple[800],
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
