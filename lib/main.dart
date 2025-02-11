@@ -40,11 +40,7 @@ class MyApp extends StatelessWidget {
           primary: themeProvider.accentColor,
           secondary: themeProvider.accentColor,
         ),
-        elevatedButtonTheme: ElevatedButtonThemeData(
-          style: ElevatedButton.styleFrom(
-            backgroundColor: themeProvider.accentColor,
-          ),
-        ),
+
       ),
       darkTheme: ThemeData(
         brightness: Brightness.dark,
@@ -53,11 +49,7 @@ class MyApp extends StatelessWidget {
           primary: themeProvider.accentColor,
           secondary: themeProvider.accentColor,
         ),
-        elevatedButtonTheme: ElevatedButtonThemeData(
-          style: ElevatedButton.styleFrom(
-            backgroundColor: themeProvider.accentColor,
-          ),
-        ),
+        
       ),
       themeMode: themeProvider.isDarkMode ? ThemeMode.dark : ThemeMode.light,
       home: MainHomeScreen(),

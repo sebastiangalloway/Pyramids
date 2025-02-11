@@ -48,7 +48,6 @@ Mark tasks as complete by replacing `[ ]` with `[x]`.
 ## ⚙️ Settings Page Improvements
 ### 🚀 To-Do (Planned Features)
 - [ ] **Theme & Appearance**
-  - [ ] Add **Light/Dark/System Mode** toggle
   - [ ] Add **Font Size Adjustment** (Small, Medium, Large)
   - [ ] Allow **App Icon Customization** (if supported by iOS)
 - [ ] **Notifications & Reminders**
@@ -92,6 +91,8 @@ Mark tasks as complete by replacing `[ ]` with `[x]`.
 - [x] Move **Source Code Link** to the About section (or remove)
 - [x] Improve **About Creator** section
 - [x] Add **Theme Toggle** (Light/Dark mode)
+- [x] Add **Accents** select
+
 
 
 
