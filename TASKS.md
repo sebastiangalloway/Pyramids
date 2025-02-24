@@ -47,6 +47,7 @@ Mark tasks as complete by replacing `[ ]` with `[x]`.
   - [ ] Display achievements & rewards
 - [ ] Change App Main Icon
 - [ ] Allow for pyramid reset in settings
+- [ ] Add enemy animations should be easy
 
 ## ⚙️ Settings Page Improvements
 ### 🚀 To-Do (Planned Features)
