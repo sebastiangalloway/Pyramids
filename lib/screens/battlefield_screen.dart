@@ -1,10 +1,11 @@
-import 'dart:math';
-import 'package:collection/collection.dart'; // ✅ Add this at the top
 import 'dart:async';
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../data/task_database.dart';
+import 'package:collection/collection.dart'; // ✅ Add this at the top
 import '../models/game/enemy.dart';
+import '../models/game/enemy_widget.dart'; // ✅ Import the new EnemyWidget
 
 class BattlefieldScreen extends StatefulWidget {
   @override
@@ -14,12 +15,14 @@ class BattlefieldScreen extends StatefulWidget {
 class _BattlefieldScreenState extends State<BattlefieldScreen> {
   final Random _random = Random();
   late List<Enemy> _enemies;
-  Timer? _movementTimer;
+  final Map<Enemy, Timer> _enemyTimers = {}; // ✅ Separate timers per enemy
 
   @override
   void initState() {
     super.initState();
     final taskDatabase = Provider.of<TaskDatabase>(context, listen: false);
+
+    // ✅ Create enemies with unique speeds & starting angles
     _enemies = taskDatabase.currentTasks.map((task) {
       return Enemy(
         name: task.title,
@@ -27,38 +30,34 @@ class _BattlefieldScreenState extends State<BattlefieldScreen> {
         position: _getRandomPosition(),
       );
     }).toList();
-    _animateEnemies();
+
+    _startEnemyMovements();
   }
 
   Offset _getRandomPosition() {
     return Offset(_random.nextDouble() * 300, _random.nextDouble() * 500);
   }
 
-  void _animateEnemies() {
-    _movementTimer?.cancel(); // Stop existing timer if it exists
-    _movementTimer = Timer.periodic(Duration(milliseconds: 500), (timer) {
-      if (mounted) {
-        setState(() {
-          _enemies = _enemies.map((enemy) {
-            return Enemy(
-              name: enemy.name,
-              difficulty: enemy.difficulty,
-              position: Offset(
-                (enemy.position.dx + _random.nextDouble() * 50 - 25)
-                    .clamp(0, 300),
-                (enemy.position.dy + _random.nextDouble() * 50 - 25)
-                    .clamp(0, 500),
-              ),
-            );
-          }).toList();
-        });
-      }
-    });
+  void _startEnemyMovements() {
+    for (var enemy in _enemies) {
+      _enemyTimers[enemy] = Timer.periodic(
+        Duration(milliseconds: (1000 ~/ (enemy.difficulty + 1))), // ✅ Speed based on difficulty
+        (timer) {
+          if (!mounted) return;
+
+          setState(() {
+            enemy.move(); // ✅ Uses curved movement logic
+          });
+        },
+      );
+    }
   }
 
   @override
   void dispose() {
-    _movementTimer?.cancel(); // Stop movement updates when screen is closed
+    for (var timer in _enemyTimers.values) {
+      timer.cancel(); // ✅ Stop all enemy movement timers
+    }
     super.dispose();
   }
 
@@ -69,40 +68,39 @@ class _BattlefieldScreenState extends State<BattlefieldScreen> {
     return Scaffold(
       body: Stack(
         children: _enemies.map((enemy) {
-          return AnimatedPositioned(
-            duration: Duration(milliseconds: 500),
-            curve: Curves.easeInOut,
-            left: enemy.position.dx,
-            top: enemy.position.dy,
-            child: EnemyWidget(
-              enemy: enemy,
-              onTap: () {
-                setState(() {
-                  enemy.reduceHP();
-                });
-
-                if (enemy.isDefeated()) {
-
-                  final taskToDefeat = taskDatabase.currentTasks.firstWhereOrNull(
-                    (t) => t.title == enemy.name,
-                  );
-
-                  if (taskToDefeat != null) {
-                    taskDatabase.defeatTask(taskToDefeat.id);
+          return TweenAnimationBuilder<Offset>(
+            key: ValueKey(enemy.name), // ✅ Ensures animations are unique per enemy
+            tween: Tween<Offset>(begin: enemy.position, end: enemy.position),
+            duration: Duration(milliseconds: 600), // ✅ Slower transition for smooth effect
+            curve: Curves.easeInOut, // ✅ Adds fluidity
+            builder: (context, position, child) {
+              return Positioned(
+                left: position.dx,
+                top: position.dy,
+                child: EnemyWidget(
+                  enemy: enemy,
+                  onTap: () {
                     setState(() {
-                      _enemies.remove(enemy); // Remove defeated enemy
+                      enemy.reduceHP();
                     });
-                  }
 
-                  if (taskToDefeat != null) {
-                    taskDatabase.defeatTask(taskToDefeat.id);
-                    setState(() {
-                      _enemies.remove(enemy); // Remove defeated enemy
-                    });
-                  }
-                }
-              },
-            ),
+                    if (enemy.isDefeated()) {
+                      final taskToDefeat = taskDatabase.currentTasks.firstWhereOrNull(
+                        (t) => t.title == enemy.name,
+                      );
+
+                      if (taskToDefeat != null) {
+                        taskDatabase.defeatTask(taskToDefeat.id);
+                        setState(() {
+                          _enemyTimers[enemy]?.cancel(); // ✅ Stop this enemy's movement
+                          _enemies.remove(enemy); // ✅ Remove defeated enemy
+                        });
+                      }
+                    }
+                  },
+                ),
+              );
+            },
           );
         }).toList(),
       ),

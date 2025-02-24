@@ -1,11 +1,23 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
 
 class Enemy {
   String name;
   int difficulty;
   Offset position;
+  double speed;
+  double angle; // ✅ Used for curved movement
 
-  Enemy({required this.name, required this.difficulty, required this.position});
+  Enemy({
+    required this.name,
+    required this.difficulty,
+    required this.position,
+    double? speed,
+    double? angle,
+  })  : speed = speed ??
+            (Random().nextDouble() * 1.5 + 0.5), // ✅ Unique speed (0.5 - 2.0)
+        angle = angle ??
+            Random().nextDouble() * 2 * pi; // ✅ Unique movement direction
 
   void reduceHP() {
     difficulty -= 1;
@@ -14,35 +26,14 @@ class Enemy {
   bool isDefeated() {
     return difficulty <= 0;
   }
-}
 
-class EnemyWidget extends StatelessWidget {
-  final Enemy enemy;
-  final VoidCallback onTap;
-
-  const EnemyWidget({required this.enemy, required this.onTap});
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        padding: EdgeInsets.all(10),
-        decoration: BoxDecoration(
-          color: Colors.redAccent,
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text("⚔️ ${enemy.name}",
-                style: TextStyle(
-                    color: Colors.white, fontWeight: FontWeight.bold)),
-            Text("HP: ${enemy.difficulty * 10}",
-                style: TextStyle(color: Colors.white70)),
-          ],
-        ),
-      ),
+  // ✅ Move smoothly in a circular path
+  void move() {
+    angle += (Random().nextDouble() - 0.5) *
+        0.2; // ✅ Adds slight variation for curves
+    position = Offset(
+      (position.dx + cos(angle) * speed * 10).clamp(0, 300),
+      (position.dy + sin(angle) * speed * 10).clamp(0, 500),
     );
   }
 }
