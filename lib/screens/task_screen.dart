@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../models/task.dart';
-import '/models/task_database.dart';
+import '../data/task_database.dart';
 
 class TaskScreen extends StatefulWidget {
   const TaskScreen({super.key});

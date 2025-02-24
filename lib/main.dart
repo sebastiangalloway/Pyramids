@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'screens/task_screen.dart';
 import 'providers/theme_provider.dart';
 import 'screens/add_task_screen.dart';
-import 'models/task_database.dart';
+import 'data/task_database.dart';
 import 'main_home_screen.dart';
 
 void main() async {

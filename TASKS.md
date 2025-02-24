@@ -11,6 +11,7 @@ Mark tasks as complete by replacing `[ ]` with `[x]`.
   - [x] User inserts a to-do item
   - [ ] User selects option to break down task
   - [ ] AI generates **up to 5** actionable steps
+  - [ ] Chunked task breaks into mini versions of the main enemy like slimes in Minecraft
 - [ ] Add emotion logger (track dates/times/emotional states)
 - [ ] Implement AI-based suggestions for shifting emotional states
 - [ ] Implement self-care trackers & incentivizers
@@ -44,6 +45,7 @@ Mark tasks as complete by replacing `[ ]` with `[x]`.
 - [ ] Progress Page:
   - [ ] Track user activity trends over time
   - [ ] Display achievements & rewards
+- [ ] Change App Main Icon
 
 ## ⚙️ Settings Page Improvements
 ### 🚀 To-Do (Planned Features)

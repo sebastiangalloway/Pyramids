@@ -9,7 +9,7 @@ class ThemeProvider extends ChangeNotifier {
   Color get accentColor => _accentColor;
 
   ThemeProvider() {
-    _loadSettings();
+    Future.microtask(() => _loadSettings());
   }
 
   Future<void> _loadSettings() async {
