@@ -75,6 +75,7 @@ Mark tasks as complete by replacing `[ ]` with `[x]`.
 - [ ] Review **TODOs** in code
 - [ ] Ensure **.gitignore** includes necessary files
 - [ ] Reach out to neurodivergent individuals for feedback
+- [ ] Add difficulty input for task at creation
 - [ ] Implement **actual settings functionality**:
   - [ ] Add **Notifications Toggle** (Enable/Disable Reminders)
   - [ ] Add **Account Preferences** section

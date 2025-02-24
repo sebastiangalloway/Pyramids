@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart'; // Missing import?
-import '../data/task_database.dart'; // Import your database functions
+import 'package:provider/provider.dart';
+import '../data/task_database.dart';
 
 class BattlefieldScreen extends StatefulWidget {
   @override
@@ -8,11 +8,13 @@ class BattlefieldScreen extends StatefulWidget {
 }
 
 class _BattlefieldScreenState extends State<BattlefieldScreen> {
+  Map<int, bool> isAttackedMap = {}; // Track attack animations per enemy
 
   @override
   Widget build(BuildContext context) {
     final taskDatabase = Provider.of<TaskDatabase>(context);
-    final tasks = taskDatabase.currentTasks; // Get tasks from Provider
+    final tasks = taskDatabase.currentTasks;
+
     return Scaffold(
       body: tasks.isEmpty
           ? Center(child: Text("No enemies yet! Add tasks to spawn them."))
@@ -20,20 +22,41 @@ class _BattlefieldScreenState extends State<BattlefieldScreen> {
               itemCount: tasks.length,
               itemBuilder: (context, index) {
                 final task = tasks[index];
-                return ListTile(
-                  title: Text("⚔️ ${_generateEnemyName(task.title)}"),
-                  subtitle: Text("HP: ${task.difficulty * 10}"), 
-                  trailing: IconButton(
-                    icon: Icon(Icons.local_fire_department, color: Colors.red), // Attack icon
-                    onPressed: () {
-                      setState(() {
-                        task.difficulty -= 1; // Decrease difficulty (HP)
-                      });
 
-                      if (task.difficulty <= 0) {
-                        taskDatabase.deleteTask(task.id); // Remove defeated enemy
-                      }
-                    },
+                // Initialize attack state
+                isAttackedMap[task.id] ??= false;
+
+                return AnimatedContainer(
+                  duration: Duration(milliseconds: 300), // Faster flash effect
+                  color: isAttackedMap[task.id]!
+                      ? Colors.redAccent.withOpacity(0.5) // Brief flash
+                      : Colors.transparent, // Normal state
+                  child: ListTile(
+                    title: Text("⚔️ ${_generateEnemyName(task.title)}"),
+                    subtitle: Text("HP: ${task.difficulty * 10}"),
+                    trailing: IconButton(
+                      icon:
+                          Icon(Icons.local_fire_department, color: Colors.red),
+                      onPressed: () {
+                        setState(() {
+                          isAttackedMap[task.id] = true; // Trigger red flash
+                        });
+
+                        Future.delayed(Duration(milliseconds: 300), () {
+                          setState(() {
+                            isAttackedMap[task.id] = false; // Reset flash
+                          });
+                        });
+
+                        setState(() {
+                          task.difficulty -= 1;
+                        });
+
+                        if (task.difficulty <= 0) {
+                          taskDatabase.deleteTask(task.id);
+                        }
+                      },
+                    ),
                   ),
                 );
               },
