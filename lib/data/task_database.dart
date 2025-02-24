@@ -5,15 +5,28 @@ import 'package:pyramids/models/task.dart';
 import 'package:pyramids/models/pyramid_brick.dart';
 
 class TaskDatabase extends ChangeNotifier {
+  static final TaskDatabase _instance =
+      TaskDatabase._internal(); // ✅ Define Singleton
+  factory TaskDatabase() => _instance;
+
+  TaskDatabase._internal() {
+    fetchTasks();
+    fetchBricks();
+  }
+
   static late Isar isar;
 
-  //init
+  // ✅ Initialize database and ensure data is fetched before UI builds
   static Future<void> initialize() async {
     final dir = await getApplicationDocumentsDirectory();
     isar = await Isar.open(
-      [TaskSchema, PyramidBrickSchema], // Register both Task & PyramidBrick
+      [TaskSchema, PyramidBrickSchema],
       directory: dir.path,
     );
+
+    // ✅ Ensure tasks & bricks are loaded before app starts
+    await _instance.fetchTasks();
+    await _instance.fetchBricks();
   }
 
   // Lists for tasks and pyramid bricks
@@ -26,7 +39,7 @@ class TaskDatabase extends ChangeNotifier {
     await isar.writeTxn(() async {
       isar.tasks.put(newTask);
     });
-    fetchTasks();
+    await fetchTasks(); // ✅ Ensure UI updates
   }
 
   // Read tasks
@@ -55,8 +68,8 @@ class TaskDatabase extends ChangeNotifier {
             .put(PyramidBrick(title: existingTask.title)); // Convert to brick
         await isar.tasks.delete(id); // Remove from task list
       });
-      fetchTasks();
-      fetchBricks(); // Update bricks UI
+      await fetchTasks();
+      await fetchBricks();
     }
   }
 
@@ -68,7 +81,7 @@ class TaskDatabase extends ChangeNotifier {
       await isar.writeTxn(() async {
         isar.tasks.put(existingTask);
       });
-      fetchTasks();
+      await fetchTasks();
     }
   }
 
@@ -80,7 +93,7 @@ class TaskDatabase extends ChangeNotifier {
       await isar.writeTxn(() async {
         isar.tasks.put(existingTask);
       });
-      fetchTasks();
+      await fetchTasks();
     }
   }
 
@@ -89,6 +102,6 @@ class TaskDatabase extends ChangeNotifier {
     await isar.writeTxn(() async {
       isar.tasks.delete(id);
     });
-    fetchTasks();
+    await fetchTasks();
   }
 }

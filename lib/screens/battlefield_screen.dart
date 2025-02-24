@@ -1,6 +1,10 @@
+import 'dart:math';
+import 'package:collection/collection.dart'; // ✅ Add this at the top
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../data/task_database.dart';
+import '../models/game/enemy.dart';
 
 class BattlefieldScreen extends StatefulWidget {
   @override
@@ -8,64 +12,100 @@ class BattlefieldScreen extends StatefulWidget {
 }
 
 class _BattlefieldScreenState extends State<BattlefieldScreen> {
-  Map<int, bool> isAttackedMap = {};
+  final Random _random = Random();
+  late List<Enemy> _enemies;
+  Timer? _movementTimer;
+
+  @override
+  void initState() {
+    super.initState();
+    final taskDatabase = Provider.of<TaskDatabase>(context, listen: false);
+    _enemies = taskDatabase.currentTasks.map((task) {
+      return Enemy(
+        name: task.title,
+        difficulty: task.difficulty,
+        position: _getRandomPosition(),
+      );
+    }).toList();
+    _animateEnemies();
+  }
+
+  Offset _getRandomPosition() {
+    return Offset(_random.nextDouble() * 300, _random.nextDouble() * 500);
+  }
+
+  void _animateEnemies() {
+    _movementTimer?.cancel(); // Stop existing timer if it exists
+    _movementTimer = Timer.periodic(Duration(milliseconds: 500), (timer) {
+      if (mounted) {
+        setState(() {
+          _enemies = _enemies.map((enemy) {
+            return Enemy(
+              name: enemy.name,
+              difficulty: enemy.difficulty,
+              position: Offset(
+                (enemy.position.dx + _random.nextDouble() * 50 - 25)
+                    .clamp(0, 300),
+                (enemy.position.dy + _random.nextDouble() * 50 - 25)
+                    .clamp(0, 500),
+              ),
+            );
+          }).toList();
+        });
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _movementTimer?.cancel(); // Stop movement updates when screen is closed
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     final taskDatabase = Provider.of<TaskDatabase>(context);
-    final tasks = taskDatabase.currentTasks;
 
     return Scaffold(
-      body: tasks.isEmpty
-          ? Center(child: Text("No enemies yet! Add tasks to spawn them."))
-          : ListView.builder(
-              itemCount: tasks.length,
-              itemBuilder: (context, index) {
-                final task = tasks[index];
+      body: Stack(
+        children: _enemies.map((enemy) {
+          return AnimatedPositioned(
+            duration: Duration(milliseconds: 500),
+            curve: Curves.easeInOut,
+            left: enemy.position.dx,
+            top: enemy.position.dy,
+            child: EnemyWidget(
+              enemy: enemy,
+              onTap: () {
+                setState(() {
+                  enemy.reduceHP();
+                });
 
-                isAttackedMap[task.id] ??= false;
+                if (enemy.isDefeated()) {
 
-                return AnimatedContainer(
-                  duration: Duration(milliseconds: 300),
-                  color: isAttackedMap[task.id]!
-                      ? Colors.redAccent.withOpacity(0.5)
-                      : Colors.transparent,
-                  child: ListTile(
-                    title: Text("⚔️ ${_generateEnemyName(task.title)}"),
-                    subtitle: Text("HP: ${task.difficulty * 10}"),
-                    trailing: IconButton(
-                      icon:
-                          Icon(Icons.local_fire_department, color: Colors.red),
-                      onPressed: () {
-                        setState(() {
-                          isAttackedMap[task.id] = true;
-                        });
+                  final taskToDefeat = taskDatabase.currentTasks.firstWhereOrNull(
+                    (t) => t.title == enemy.name,
+                  );
 
-                        Future.delayed(Duration(milliseconds: 300), () {
-                          setState(() {
-                            isAttackedMap[task.id] = false;
-                          });
-                        });
+                  if (taskToDefeat != null) {
+                    taskDatabase.defeatTask(taskToDefeat.id);
+                    setState(() {
+                      _enemies.remove(enemy); // Remove defeated enemy
+                    });
+                  }
 
-                        setState(() {
-                          task.difficulty -= 1;
-                        });
-
-                        if (task.difficulty <= 0) {
-                          taskDatabase.defeatTask(task.id); // Converts to brick
-                        }
-                      },
-                    ),
-                  ),
-                );
+                  if (taskToDefeat != null) {
+                    taskDatabase.defeatTask(taskToDefeat.id);
+                    setState(() {
+                      _enemies.remove(enemy); // Remove defeated enemy
+                    });
+                  }
+                }
               },
             ),
+          );
+        }).toList(),
+      ),
     );
-  }
-
-  String _generateEnemyName(String taskTitle) {
-    List<String> enemyPrefixes = ["Shadow", "Doom", "Fiery", "Cursed"];
-    List<String> enemyTypes = ["Goblin", "Beast", "Knight", "Specter"];
-    return "${enemyPrefixes[taskTitle.length % enemyPrefixes.length]} ${enemyTypes[taskTitle.length % enemyTypes.length]}";
   }
 }
