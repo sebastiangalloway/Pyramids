@@ -8,7 +8,7 @@ class BattlefieldScreen extends StatefulWidget {
 }
 
 class _BattlefieldScreenState extends State<BattlefieldScreen> {
-  Map<int, bool> isAttackedMap = {}; // Track attack animations per enemy
+  Map<int, bool> isAttackedMap = {};
 
   @override
   Widget build(BuildContext context) {
@@ -23,14 +23,13 @@ class _BattlefieldScreenState extends State<BattlefieldScreen> {
               itemBuilder: (context, index) {
                 final task = tasks[index];
 
-                // Initialize attack state
                 isAttackedMap[task.id] ??= false;
 
                 return AnimatedContainer(
-                  duration: Duration(milliseconds: 300), // Faster flash effect
+                  duration: Duration(milliseconds: 300),
                   color: isAttackedMap[task.id]!
-                      ? Colors.redAccent.withOpacity(0.5) // Brief flash
-                      : Colors.transparent, // Normal state
+                      ? Colors.redAccent.withOpacity(0.5)
+                      : Colors.transparent,
                   child: ListTile(
                     title: Text("⚔️ ${_generateEnemyName(task.title)}"),
                     subtitle: Text("HP: ${task.difficulty * 10}"),
@@ -39,12 +38,12 @@ class _BattlefieldScreenState extends State<BattlefieldScreen> {
                           Icon(Icons.local_fire_department, color: Colors.red),
                       onPressed: () {
                         setState(() {
-                          isAttackedMap[task.id] = true; // Trigger red flash
+                          isAttackedMap[task.id] = true;
                         });
 
                         Future.delayed(Duration(milliseconds: 300), () {
                           setState(() {
-                            isAttackedMap[task.id] = false; // Reset flash
+                            isAttackedMap[task.id] = false;
                           });
                         });
 
@@ -53,7 +52,7 @@ class _BattlefieldScreenState extends State<BattlefieldScreen> {
                         });
 
                         if (task.difficulty <= 0) {
-                          taskDatabase.deleteTask(task.id);
+                          taskDatabase.defeatTask(task.id); // Converts to brick
                         }
                       },
                     ),

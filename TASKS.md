@@ -24,10 +24,8 @@ Mark tasks as complete by replacing `[ ]` with `[x]`.
 - [ ] Make video on using application and add to README
 
 ### 🎮 Gamification & Battlefield
-- [ ] Connect to-do list with **Battlefield Mode**
-  - [ ] Tasks appear as **enemies**
-  - [ ] Completing tasks deals **damage**
   - [ ] Killed tasks convert into **pyramid bricks**
+  - [ ] Enemies roam around battlefield screen
 - [ ] Implement **inventory system & power-ups**
 - [ ] Task difficulty impacts **enemy strength**
 - [ ] Mindfulness & exercises grant **powers** (e.g., extend timers, boost XP)
@@ -95,6 +93,11 @@ Mark tasks as complete by replacing `[ ]` with `[x]`.
 - [x] Improve **About Creator** section
 - [x] Add **Theme Toggle** (Light/Dark mode)
 - [x] Add **Accents** select
+- [x] Connect to-do list with **Battlefield Mode**
+  - [x] Tasks appear as **enemies**
+  - [x] Completing tasks deals **damage**
+  - [x] Killed tasks convert into **pyramid bricks**
+
 
 
 

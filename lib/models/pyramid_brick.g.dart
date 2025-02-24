@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'task.dart';
+part of 'pyramid_brick.dart';
 
 // **************************************************************************
 // IsarCollectionGenerator
@@ -9,46 +9,41 @@ part of 'task.dart';
 // coverage:ignore-file
 // ignore_for_file: duplicate_ignore, non_constant_identifier_names, constant_identifier_names, invalid_use_of_protected_member, unnecessary_cast, prefer_const_constructors, lines_longer_than_80_chars, require_trailing_commas, inference_failure_on_function_invocation, unnecessary_parenthesis, unnecessary_raw_strings, unnecessary_null_checks, join_return_with_assignment, prefer_final_locals, avoid_js_rounded_ints, avoid_positional_boolean_parameters, always_specify_types
 
-extension GetTaskCollection on Isar {
-  IsarCollection<Task> get tasks => this.collection();
+extension GetPyramidBrickCollection on Isar {
+  IsarCollection<PyramidBrick> get pyramidBricks => this.collection();
 }
 
-const TaskSchema = CollectionSchema(
-  name: r'Task',
-  id: 2998003626758701373,
+const PyramidBrickSchema = CollectionSchema(
+  name: r'PyramidBrick',
+  id: -1501296347065578270,
   properties: {
-    r'difficulty': PropertySchema(
+    r'createdAt': PropertySchema(
       id: 0,
-      name: r'difficulty',
-      type: IsarType.long,
-    ),
-    r'isCompleted': PropertySchema(
-      id: 1,
-      name: r'isCompleted',
-      type: IsarType.bool,
+      name: r'createdAt',
+      type: IsarType.dateTime,
     ),
     r'title': PropertySchema(
-      id: 2,
+      id: 1,
       name: r'title',
       type: IsarType.string,
     )
   },
-  estimateSize: _taskEstimateSize,
-  serialize: _taskSerialize,
-  deserialize: _taskDeserialize,
-  deserializeProp: _taskDeserializeProp,
+  estimateSize: _pyramidBrickEstimateSize,
+  serialize: _pyramidBrickSerialize,
+  deserialize: _pyramidBrickDeserialize,
+  deserializeProp: _pyramidBrickDeserializeProp,
   idName: r'id',
   indexes: {},
   links: {},
   embeddedSchemas: {},
-  getId: _taskGetId,
-  getLinks: _taskGetLinks,
-  attach: _taskAttach,
+  getId: _pyramidBrickGetId,
+  getLinks: _pyramidBrickGetLinks,
+  attach: _pyramidBrickAttach,
   version: '3.1.0+1',
 );
 
-int _taskEstimateSize(
-  Task object,
+int _pyramidBrickEstimateSize(
+  PyramidBrick object,
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
@@ -57,33 +52,31 @@ int _taskEstimateSize(
   return bytesCount;
 }
 
-void _taskSerialize(
-  Task object,
+void _pyramidBrickSerialize(
+  PyramidBrick object,
   IsarWriter writer,
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
-  writer.writeLong(offsets[0], object.difficulty);
-  writer.writeBool(offsets[1], object.isCompleted);
-  writer.writeString(offsets[2], object.title);
+  writer.writeDateTime(offsets[0], object.createdAt);
+  writer.writeString(offsets[1], object.title);
 }
 
-Task _taskDeserialize(
+PyramidBrick _pyramidBrickDeserialize(
   Id id,
   IsarReader reader,
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
-  final object = Task(
-    difficulty: reader.readLongOrNull(offsets[0]) ?? 1,
-    title: reader.readString(offsets[2]),
+  final object = PyramidBrick(
+    title: reader.readString(offsets[1]),
   );
+  object.createdAt = reader.readDateTime(offsets[0]);
   object.id = id;
-  object.isCompleted = reader.readBool(offsets[1]);
   return object;
 }
 
-P _taskDeserializeProp<P>(
+P _pyramidBrickDeserializeProp<P>(
   IsarReader reader,
   int propertyId,
   int offset,
@@ -91,38 +84,39 @@ P _taskDeserializeProp<P>(
 ) {
   switch (propertyId) {
     case 0:
-      return (reader.readLongOrNull(offset) ?? 1) as P;
+      return (reader.readDateTime(offset)) as P;
     case 1:
-      return (reader.readBool(offset)) as P;
-    case 2:
       return (reader.readString(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
   }
 }
 
-Id _taskGetId(Task object) {
+Id _pyramidBrickGetId(PyramidBrick object) {
   return object.id;
 }
 
-List<IsarLinkBase<dynamic>> _taskGetLinks(Task object) {
+List<IsarLinkBase<dynamic>> _pyramidBrickGetLinks(PyramidBrick object) {
   return [];
 }
 
-void _taskAttach(IsarCollection<dynamic> col, Id id, Task object) {
+void _pyramidBrickAttach(
+    IsarCollection<dynamic> col, Id id, PyramidBrick object) {
   object.id = id;
 }
 
-extension TaskQueryWhereSort on QueryBuilder<Task, Task, QWhere> {
-  QueryBuilder<Task, Task, QAfterWhere> anyId() {
+extension PyramidBrickQueryWhereSort
+    on QueryBuilder<PyramidBrick, PyramidBrick, QWhere> {
+  QueryBuilder<PyramidBrick, PyramidBrick, QAfterWhere> anyId() {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(const IdWhereClause.any());
     });
   }
 }
 
-extension TaskQueryWhere on QueryBuilder<Task, Task, QWhereClause> {
-  QueryBuilder<Task, Task, QAfterWhereClause> idEqualTo(Id id) {
+extension PyramidBrickQueryWhere
+    on QueryBuilder<PyramidBrick, PyramidBrick, QWhereClause> {
+  QueryBuilder<PyramidBrick, PyramidBrick, QAfterWhereClause> idEqualTo(Id id) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(IdWhereClause.between(
         lower: id,
@@ -131,7 +125,8 @@ extension TaskQueryWhere on QueryBuilder<Task, Task, QWhereClause> {
     });
   }
 
-  QueryBuilder<Task, Task, QAfterWhereClause> idNotEqualTo(Id id) {
+  QueryBuilder<PyramidBrick, PyramidBrick, QAfterWhereClause> idNotEqualTo(
+      Id id) {
     return QueryBuilder.apply(this, (query) {
       if (query.whereSort == Sort.asc) {
         return query
@@ -153,7 +148,8 @@ extension TaskQueryWhere on QueryBuilder<Task, Task, QWhereClause> {
     });
   }
 
-  QueryBuilder<Task, Task, QAfterWhereClause> idGreaterThan(Id id,
+  QueryBuilder<PyramidBrick, PyramidBrick, QAfterWhereClause> idGreaterThan(
+      Id id,
       {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(
@@ -162,7 +158,7 @@ extension TaskQueryWhere on QueryBuilder<Task, Task, QWhereClause> {
     });
   }
 
-  QueryBuilder<Task, Task, QAfterWhereClause> idLessThan(Id id,
+  QueryBuilder<PyramidBrick, PyramidBrick, QAfterWhereClause> idLessThan(Id id,
       {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(
@@ -171,7 +167,7 @@ extension TaskQueryWhere on QueryBuilder<Task, Task, QWhereClause> {
     });
   }
 
-  QueryBuilder<Task, Task, QAfterWhereClause> idBetween(
+  QueryBuilder<PyramidBrick, PyramidBrick, QAfterWhereClause> idBetween(
     Id lowerId,
     Id upperId, {
     bool includeLower = true,
@@ -188,51 +184,56 @@ extension TaskQueryWhere on QueryBuilder<Task, Task, QWhereClause> {
   }
 }
 
-extension TaskQueryFilter on QueryBuilder<Task, Task, QFilterCondition> {
-  QueryBuilder<Task, Task, QAfterFilterCondition> difficultyEqualTo(int value) {
+extension PyramidBrickQueryFilter
+    on QueryBuilder<PyramidBrick, PyramidBrick, QFilterCondition> {
+  QueryBuilder<PyramidBrick, PyramidBrick, QAfterFilterCondition>
+      createdAtEqualTo(DateTime value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'difficulty',
+        property: r'createdAt',
         value: value,
       ));
     });
   }
 
-  QueryBuilder<Task, Task, QAfterFilterCondition> difficultyGreaterThan(
-    int value, {
+  QueryBuilder<PyramidBrick, PyramidBrick, QAfterFilterCondition>
+      createdAtGreaterThan(
+    DateTime value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
-        property: r'difficulty',
+        property: r'createdAt',
         value: value,
       ));
     });
   }
 
-  QueryBuilder<Task, Task, QAfterFilterCondition> difficultyLessThan(
-    int value, {
+  QueryBuilder<PyramidBrick, PyramidBrick, QAfterFilterCondition>
+      createdAtLessThan(
+    DateTime value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
-        property: r'difficulty',
+        property: r'createdAt',
         value: value,
       ));
     });
   }
 
-  QueryBuilder<Task, Task, QAfterFilterCondition> difficultyBetween(
-    int lower,
-    int upper, {
+  QueryBuilder<PyramidBrick, PyramidBrick, QAfterFilterCondition>
+      createdAtBetween(
+    DateTime lower,
+    DateTime upper, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
-        property: r'difficulty',
+        property: r'createdAt',
         lower: lower,
         includeLower: includeLower,
         upper: upper,
@@ -241,7 +242,8 @@ extension TaskQueryFilter on QueryBuilder<Task, Task, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Task, Task, QAfterFilterCondition> idEqualTo(Id value) {
+  QueryBuilder<PyramidBrick, PyramidBrick, QAfterFilterCondition> idEqualTo(
+      Id value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'id',
@@ -250,7 +252,7 @@ extension TaskQueryFilter on QueryBuilder<Task, Task, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Task, Task, QAfterFilterCondition> idGreaterThan(
+  QueryBuilder<PyramidBrick, PyramidBrick, QAfterFilterCondition> idGreaterThan(
     Id value, {
     bool include = false,
   }) {
@@ -263,7 +265,7 @@ extension TaskQueryFilter on QueryBuilder<Task, Task, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Task, Task, QAfterFilterCondition> idLessThan(
+  QueryBuilder<PyramidBrick, PyramidBrick, QAfterFilterCondition> idLessThan(
     Id value, {
     bool include = false,
   }) {
@@ -276,7 +278,7 @@ extension TaskQueryFilter on QueryBuilder<Task, Task, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Task, Task, QAfterFilterCondition> idBetween(
+  QueryBuilder<PyramidBrick, PyramidBrick, QAfterFilterCondition> idBetween(
     Id lower,
     Id upper, {
     bool includeLower = true,
@@ -293,17 +295,7 @@ extension TaskQueryFilter on QueryBuilder<Task, Task, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Task, Task, QAfterFilterCondition> isCompletedEqualTo(
-      bool value) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'isCompleted',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<Task, Task, QAfterFilterCondition> titleEqualTo(
+  QueryBuilder<PyramidBrick, PyramidBrick, QAfterFilterCondition> titleEqualTo(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -316,7 +308,8 @@ extension TaskQueryFilter on QueryBuilder<Task, Task, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Task, Task, QAfterFilterCondition> titleGreaterThan(
+  QueryBuilder<PyramidBrick, PyramidBrick, QAfterFilterCondition>
+      titleGreaterThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
@@ -331,7 +324,7 @@ extension TaskQueryFilter on QueryBuilder<Task, Task, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Task, Task, QAfterFilterCondition> titleLessThan(
+  QueryBuilder<PyramidBrick, PyramidBrick, QAfterFilterCondition> titleLessThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
@@ -346,7 +339,7 @@ extension TaskQueryFilter on QueryBuilder<Task, Task, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Task, Task, QAfterFilterCondition> titleBetween(
+  QueryBuilder<PyramidBrick, PyramidBrick, QAfterFilterCondition> titleBetween(
     String lower,
     String upper, {
     bool includeLower = true,
@@ -365,7 +358,8 @@ extension TaskQueryFilter on QueryBuilder<Task, Task, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Task, Task, QAfterFilterCondition> titleStartsWith(
+  QueryBuilder<PyramidBrick, PyramidBrick, QAfterFilterCondition>
+      titleStartsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -378,7 +372,7 @@ extension TaskQueryFilter on QueryBuilder<Task, Task, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Task, Task, QAfterFilterCondition> titleEndsWith(
+  QueryBuilder<PyramidBrick, PyramidBrick, QAfterFilterCondition> titleEndsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -391,7 +385,8 @@ extension TaskQueryFilter on QueryBuilder<Task, Task, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Task, Task, QAfterFilterCondition> titleContains(String value,
+  QueryBuilder<PyramidBrick, PyramidBrick, QAfterFilterCondition> titleContains(
+      String value,
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.contains(
@@ -402,7 +397,8 @@ extension TaskQueryFilter on QueryBuilder<Task, Task, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Task, Task, QAfterFilterCondition> titleMatches(String pattern,
+  QueryBuilder<PyramidBrick, PyramidBrick, QAfterFilterCondition> titleMatches(
+      String pattern,
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.matches(
@@ -413,7 +409,8 @@ extension TaskQueryFilter on QueryBuilder<Task, Task, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Task, Task, QAfterFilterCondition> titleIsEmpty() {
+  QueryBuilder<PyramidBrick, PyramidBrick, QAfterFilterCondition>
+      titleIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'title',
@@ -422,7 +419,8 @@ extension TaskQueryFilter on QueryBuilder<Task, Task, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Task, Task, QAfterFilterCondition> titleIsNotEmpty() {
+  QueryBuilder<PyramidBrick, PyramidBrick, QAfterFilterCondition>
+      titleIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         property: r'title',
@@ -432,112 +430,87 @@ extension TaskQueryFilter on QueryBuilder<Task, Task, QFilterCondition> {
   }
 }
 
-extension TaskQueryObject on QueryBuilder<Task, Task, QFilterCondition> {}
+extension PyramidBrickQueryObject
+    on QueryBuilder<PyramidBrick, PyramidBrick, QFilterCondition> {}
 
-extension TaskQueryLinks on QueryBuilder<Task, Task, QFilterCondition> {}
+extension PyramidBrickQueryLinks
+    on QueryBuilder<PyramidBrick, PyramidBrick, QFilterCondition> {}
 
-extension TaskQuerySortBy on QueryBuilder<Task, Task, QSortBy> {
-  QueryBuilder<Task, Task, QAfterSortBy> sortByDifficulty() {
+extension PyramidBrickQuerySortBy
+    on QueryBuilder<PyramidBrick, PyramidBrick, QSortBy> {
+  QueryBuilder<PyramidBrick, PyramidBrick, QAfterSortBy> sortByCreatedAt() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'difficulty', Sort.asc);
+      return query.addSortBy(r'createdAt', Sort.asc);
     });
   }
 
-  QueryBuilder<Task, Task, QAfterSortBy> sortByDifficultyDesc() {
+  QueryBuilder<PyramidBrick, PyramidBrick, QAfterSortBy> sortByCreatedAtDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'difficulty', Sort.desc);
+      return query.addSortBy(r'createdAt', Sort.desc);
     });
   }
 
-  QueryBuilder<Task, Task, QAfterSortBy> sortByIsCompleted() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'isCompleted', Sort.asc);
-    });
-  }
-
-  QueryBuilder<Task, Task, QAfterSortBy> sortByIsCompletedDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'isCompleted', Sort.desc);
-    });
-  }
-
-  QueryBuilder<Task, Task, QAfterSortBy> sortByTitle() {
+  QueryBuilder<PyramidBrick, PyramidBrick, QAfterSortBy> sortByTitle() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'title', Sort.asc);
     });
   }
 
-  QueryBuilder<Task, Task, QAfterSortBy> sortByTitleDesc() {
+  QueryBuilder<PyramidBrick, PyramidBrick, QAfterSortBy> sortByTitleDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'title', Sort.desc);
     });
   }
 }
 
-extension TaskQuerySortThenBy on QueryBuilder<Task, Task, QSortThenBy> {
-  QueryBuilder<Task, Task, QAfterSortBy> thenByDifficulty() {
+extension PyramidBrickQuerySortThenBy
+    on QueryBuilder<PyramidBrick, PyramidBrick, QSortThenBy> {
+  QueryBuilder<PyramidBrick, PyramidBrick, QAfterSortBy> thenByCreatedAt() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'difficulty', Sort.asc);
+      return query.addSortBy(r'createdAt', Sort.asc);
     });
   }
 
-  QueryBuilder<Task, Task, QAfterSortBy> thenByDifficultyDesc() {
+  QueryBuilder<PyramidBrick, PyramidBrick, QAfterSortBy> thenByCreatedAtDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'difficulty', Sort.desc);
+      return query.addSortBy(r'createdAt', Sort.desc);
     });
   }
 
-  QueryBuilder<Task, Task, QAfterSortBy> thenById() {
+  QueryBuilder<PyramidBrick, PyramidBrick, QAfterSortBy> thenById() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'id', Sort.asc);
     });
   }
 
-  QueryBuilder<Task, Task, QAfterSortBy> thenByIdDesc() {
+  QueryBuilder<PyramidBrick, PyramidBrick, QAfterSortBy> thenByIdDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'id', Sort.desc);
     });
   }
 
-  QueryBuilder<Task, Task, QAfterSortBy> thenByIsCompleted() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'isCompleted', Sort.asc);
-    });
-  }
-
-  QueryBuilder<Task, Task, QAfterSortBy> thenByIsCompletedDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'isCompleted', Sort.desc);
-    });
-  }
-
-  QueryBuilder<Task, Task, QAfterSortBy> thenByTitle() {
+  QueryBuilder<PyramidBrick, PyramidBrick, QAfterSortBy> thenByTitle() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'title', Sort.asc);
     });
   }
 
-  QueryBuilder<Task, Task, QAfterSortBy> thenByTitleDesc() {
+  QueryBuilder<PyramidBrick, PyramidBrick, QAfterSortBy> thenByTitleDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'title', Sort.desc);
     });
   }
 }
 
-extension TaskQueryWhereDistinct on QueryBuilder<Task, Task, QDistinct> {
-  QueryBuilder<Task, Task, QDistinct> distinctByDifficulty() {
+extension PyramidBrickQueryWhereDistinct
+    on QueryBuilder<PyramidBrick, PyramidBrick, QDistinct> {
+  QueryBuilder<PyramidBrick, PyramidBrick, QDistinct> distinctByCreatedAt() {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'difficulty');
+      return query.addDistinctBy(r'createdAt');
     });
   }
 
-  QueryBuilder<Task, Task, QDistinct> distinctByIsCompleted() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'isCompleted');
-    });
-  }
-
-  QueryBuilder<Task, Task, QDistinct> distinctByTitle(
+  QueryBuilder<PyramidBrick, PyramidBrick, QDistinct> distinctByTitle(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'title', caseSensitive: caseSensitive);
@@ -545,26 +518,21 @@ extension TaskQueryWhereDistinct on QueryBuilder<Task, Task, QDistinct> {
   }
 }
 
-extension TaskQueryProperty on QueryBuilder<Task, Task, QQueryProperty> {
-  QueryBuilder<Task, int, QQueryOperations> idProperty() {
+extension PyramidBrickQueryProperty
+    on QueryBuilder<PyramidBrick, PyramidBrick, QQueryProperty> {
+  QueryBuilder<PyramidBrick, int, QQueryOperations> idProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'id');
     });
   }
 
-  QueryBuilder<Task, int, QQueryOperations> difficultyProperty() {
+  QueryBuilder<PyramidBrick, DateTime, QQueryOperations> createdAtProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'difficulty');
+      return query.addPropertyName(r'createdAt');
     });
   }
 
-  QueryBuilder<Task, bool, QQueryOperations> isCompletedProperty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'isCompleted');
-    });
-  }
-
-  QueryBuilder<Task, String, QQueryOperations> titleProperty() {
+  QueryBuilder<PyramidBrick, String, QQueryOperations> titleProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'title');
     });

@@ -3,7 +3,7 @@ import 'package:isar/isar.dart';
 part 'task.g.dart';
 
 @Collection()
-@Collection()
+//TODO remove isCompleted if unused and rebuild
 class Task {
   Id id = Isar.autoIncrement;
   String title;

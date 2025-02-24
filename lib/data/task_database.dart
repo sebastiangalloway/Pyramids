@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:isar/isar.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pyramids/models/task.dart';
+import 'package:pyramids/models/pyramid_brick.dart';
 
 class TaskDatabase extends ChangeNotifier {
   static late Isar isar;
@@ -10,39 +11,56 @@ class TaskDatabase extends ChangeNotifier {
   static Future<void> initialize() async {
     final dir = await getApplicationDocumentsDirectory();
     isar = await Isar.open(
-      [TaskSchema],
+      [TaskSchema, PyramidBrickSchema], // Register both Task & PyramidBrick
       directory: dir.path,
     );
   }
 
-  //list of notes
+  // Lists for tasks and pyramid bricks
   final List<Task> currentTasks = [];
+  final List<PyramidBrick> pyramidBricks = [];
 
-  //create and add tasks
+  // Create and add tasks
   Future<void> addTask(String userNewTitle) async {
-    // creates new task object
     final newTask = Task(title: userNewTitle);
-
-    //save to db
     await isar.writeTxn(() async {
       isar.tasks.put(newTask);
     });
-
-    //re-read from db
     fetchTasks();
   }
 
-  //read
+  // Read tasks
   Future<void> fetchTasks() async {
     List<Task> fetchedTasks = await isar.tasks.where().findAll();
     currentTasks.clear();
     currentTasks.addAll(fetchedTasks);
-
-    //update
     notifyListeners();
   }
 
-  //update
+  // Read bricks
+  Future<void> fetchBricks() async {
+    List<PyramidBrick> fetchedBricks =
+        await isar.pyramidBricks.where().findAll();
+    pyramidBricks.clear();
+    pyramidBricks.addAll(fetchedBricks);
+    notifyListeners();
+  }
+
+  // Convert a defeated enemy (task) into a pyramid brick
+  Future<void> defeatTask(int id) async {
+    final existingTask = await isar.tasks.get(id);
+    if (existingTask != null) {
+      await isar.writeTxn(() async {
+        await isar.pyramidBricks
+            .put(PyramidBrick(title: existingTask.title)); // Convert to brick
+        await isar.tasks.delete(id); // Remove from task list
+      });
+      fetchTasks();
+      fetchBricks(); // Update bricks UI
+    }
+  }
+
+  // Edit a task
   Future<void> editTask(int id, String newTitle) async {
     final existingTask = await isar.tasks.get(id);
     if (existingTask != null) {
@@ -50,10 +68,11 @@ class TaskDatabase extends ChangeNotifier {
       await isar.writeTxn(() async {
         isar.tasks.put(existingTask);
       });
-      await fetchTasks();
+      fetchTasks();
     }
   }
 
+  // Mark task as complete
   Future<void> checkTask(int id) async {
     final existingTask = await isar.tasks.get(id);
     if (existingTask != null) {
@@ -61,15 +80,15 @@ class TaskDatabase extends ChangeNotifier {
       await isar.writeTxn(() async {
         isar.tasks.put(existingTask);
       });
-      await fetchTasks();
+      fetchTasks();
     }
   }
 
-  //delete
+  // Delete a task
   Future<void> deleteTask(int id) async {
     await isar.writeTxn(() async {
       isar.tasks.delete(id);
     });
-    await fetchTasks();
+    fetchTasks();
   }
 }
