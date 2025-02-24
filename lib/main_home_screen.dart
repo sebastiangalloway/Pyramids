@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'screens/home_screen.dart';
 import 'screens/task_screen.dart';
 import 'screens/mindfulness_screen.dart';
@@ -9,6 +8,8 @@ import 'screens/settings_screen.dart';
 
 //TODO change naming to navigation bar to make function clearer
 class MainHomeScreen extends StatefulWidget {
+  const MainHomeScreen({super.key});
+
   @override
   _MainHomeScreenState createState() => _MainHomeScreenState();
 }

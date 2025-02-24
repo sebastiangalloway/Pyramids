@@ -38,12 +38,15 @@ Mark tasks as complete by replacing `[ ]` with `[x]`.
 
 ### 📈 Progress & Visualization
 - [ ] Home Page:
-  - [ ] Dynamic pyramid visualization for completed tasks
+- [ ] Dynamic pyramid brick visualization for completed tasks
+  - [ ] pyramid bricks display in 3d or 2d pattern
+  - [ ] when brick clicked gives task information
   - [ ] Smart task suggestions from past activity
 - [ ] Progress Page:
   - [ ] Track user activity trends over time
   - [ ] Display achievements & rewards
 - [ ] Change App Main Icon
+- [ ] Allow for pyramid reset in settings
 
 ## ⚙️ Settings Page Improvements
 ### 🚀 To-Do (Planned Features)

@@ -6,7 +6,8 @@ class Enemy {
   int difficulty;
   Offset position;
   double speed;
-  double angle; // ✅ Used for curved movement
+  double angle;
+  String imagePath; // ✅ Stores the randomly assigned enemy image
 
   Enemy({
     required this.name,
@@ -14,10 +15,11 @@ class Enemy {
     required this.position,
     double? speed,
     double? angle,
-  })  : speed = speed ??
-            (Random().nextDouble() * 1.5 + 0.5), // ✅ Unique speed (0.5 - 2.0)
-        angle = angle ??
-            Random().nextDouble() * 2 * pi; // ✅ Unique movement direction
+    String? imagePath,
+  })  : speed = speed ?? (Random().nextDouble() * 1.5 + 0.5),
+        angle = angle ?? Random().nextDouble() * 2 * pi,
+        imagePath =
+            imagePath ?? _getRandomOrkImage(); // ✅ Random image selection
 
   void reduceHP() {
     difficulty -= 1;
@@ -27,13 +29,21 @@ class Enemy {
     return difficulty <= 0;
   }
 
-  // ✅ Move smoothly in a circular path
   void move() {
-    angle += (Random().nextDouble() - 0.5) *
-        0.2; // ✅ Adds slight variation for curves
+    angle += (Random().nextDouble() - 0.5) * 0.2;
     position = Offset(
       (position.dx + cos(angle) * speed * 10).clamp(0, 300),
       (position.dy + sin(angle) * speed * 10).clamp(0, 500),
     );
+  }
+
+  // ✅ Randomly select one of three Ork images
+  static String _getRandomOrkImage() {
+    List<String> orkImages = [
+      'assets/enemies/1_ORK/ATTAK/ATTAK_002.png',
+      'assets/enemies/2_ORK/ATTAK/ATTAK_002.png',
+      'assets/enemies/3_ORK/ATTAK/ATTAK_002.png',
+    ];
+    return orkImages[Random().nextInt(orkImages.length)];
   }
 }

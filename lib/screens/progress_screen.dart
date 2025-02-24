@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../data/task_database.dart';
-import '../models/pyramid_brick.dart';
 
 class ProgressScreen extends StatelessWidget {
+  const ProgressScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     final taskDatabase = Provider.of<TaskDatabase>(context);

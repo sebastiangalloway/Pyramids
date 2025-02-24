@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'enemy.dart';
+import '../game/enemy.dart';
 
 class EnemyWidget extends StatelessWidget {
   final Enemy enemy;
@@ -11,34 +11,42 @@ class EnemyWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap, // ✅ Attack enemy when tapped
-      child: Container(
-        padding: EdgeInsets.all(10),
-        decoration: BoxDecoration(
-          color: Colors.redAccent,
-          shape: BoxShape.circle, // ✅ Makes enemy a circle
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black26,
-              blurRadius: 5,
-              spreadRadius: 2,
+      onTap: onTap, // ✅ Now this will trigger confirmation before attacking
+      child: Column(
+        children: [
+          Container(
+            width: 60,
+            height: 60,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black26,
+                  blurRadius: 5,
+                  spreadRadius: 2,
+                ),
+              ],
             ),
-          ],
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              "⚔️ ${enemy.name}",
-              style:
-                  TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+            child: ClipOval(
+              child: Image.asset(
+                enemy.imagePath, // ✅ Load the assigned enemy image
+                fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) =>
+                    Icon(Icons.error, color: Colors.red),
+              ),
             ),
-            Text(
-              "HP: ${enemy.difficulty * 10}",
-              style: TextStyle(color: Colors.white70),
+          ),
+          const SizedBox(height: 5), // ✅ Add spacing
+          Text(
+            enemy.name, // ✅ Show the task name under the enemy
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 12,
+              fontWeight: FontWeight.bold,
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
