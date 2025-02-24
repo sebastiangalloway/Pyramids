@@ -22,11 +22,19 @@ class _BattlefieldScreenState extends State<BattlefieldScreen> {
                 final task = tasks[index];
                 return ListTile(
                   title: Text("⚔️ ${_generateEnemyName(task.title)}"),
-                  //TODO replace with task.difficulty
-                  subtitle: Text(
-                      "HP: ${10}"), // "HP: ${task.difficulty * 10}"), // Example: Difficulty scales enemy HP
-                  trailing: Icon(
-                      Icons.fitness_center), // Use a fun icon for battle theme
+                  subtitle: Text("HP: ${task.difficulty * 10}"), 
+                  trailing: IconButton(
+                    icon: Icon(Icons.local_fire_department, color: Colors.red), // Attack icon
+                    onPressed: () {
+                      setState(() {
+                        task.difficulty -= 1; // Decrease difficulty (HP)
+                      });
+
+                      if (task.difficulty <= 0) {
+                        taskDatabase.deleteTask(task.id); // Remove defeated enemy
+                      }
+                    },
+                  ),
                 );
               },
             ),
