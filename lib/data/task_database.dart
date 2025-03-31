@@ -104,4 +104,11 @@ class TaskDatabase extends ChangeNotifier {
     });
     await fetchTasks();
   }
+
+  Future<void> resetBricks() async {
+    await isar.writeTxn(() async {
+      isar.pyramidBricks.clear();
+    });
+    await fetchBricks();
+  }
 }
