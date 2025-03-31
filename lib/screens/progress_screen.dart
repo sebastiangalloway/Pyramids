@@ -20,7 +20,6 @@ class _ProgressScreenState extends State<ProgressScreen> {
     final bricks = taskDatabase.pyramidBricks;
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Progress Page')),
       body: Column(
         children: [
           // Pyramid 3D widget section
@@ -39,14 +38,14 @@ class _ProgressScreenState extends State<ProgressScreen> {
                     padding: const EdgeInsets.all(16),
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 3, // Pyramid-style layout
-                      childAspectRatio: 1,
+                      crossAxisCount: 4, // Pyramid-style layout
+                      childAspectRatio: 2,
                     ),
                     itemCount: bricks.length,
                     itemBuilder: (context, index) {
                       final brick = bricks[index];
                       return Card(
-                        color: Colors.brown,
+                        color: const Color.fromARGB(255, 200, 120, 15),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
