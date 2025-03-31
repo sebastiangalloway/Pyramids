@@ -1,9 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../models/pyramid.dart';
+import '../models/pyramid_3d_widget.dart';
 import '../data/task_database.dart';
 
-class ProgressScreen extends StatelessWidget {
-  const ProgressScreen({super.key});
+class ProgressScreen extends StatefulWidget {
+  const ProgressScreen({Key? key}) : super(key: key);
+
+  @override
+  _ProgressScreenState createState() => _ProgressScreenState();
+}
+
+class _ProgressScreenState extends State<ProgressScreen> {
+  final Pyramid pyramid = Pyramid(layers: 4);
 
   @override
   Widget build(BuildContext context) {
@@ -11,32 +20,60 @@ class ProgressScreen extends StatelessWidget {
     final bricks = taskDatabase.pyramidBricks;
 
     return Scaffold(
-      body: bricks.isEmpty
-          ? Center(child: Text("No bricks yet. Defeat enemies to build!"))
-          : GridView.builder(
-              padding: EdgeInsets.all(16),
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3, // Pyramid-style layout
-                childAspectRatio: 1,
-              ),
-              itemCount: bricks.length,
-              itemBuilder: (context, index) {
-                final brick = bricks[index];
-                return Card(
-                  color: Colors.brown,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: Center(
-                    child: Text(
-                      brick.title,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.white, fontSize: 12),
+      appBar: AppBar(title: const Text('Progress Page')),
+      body: Column(
+        children: [
+          // Pyramid 3D widget section
+          Container(
+            height: 500, // adjust this height as needed
+            alignment: Alignment.center,
+            child: Pyramid3DView()
+          ),
+          // Bricks grid view section
+          Expanded(
+            child: bricks.isEmpty
+                ? const Center(
+                    child: Text("No bricks yet. Defeat enemies to build!"),
+                  )
+                : GridView.builder(
+                    padding: const EdgeInsets.all(16),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 3, // Pyramid-style layout
+                      childAspectRatio: 1,
                     ),
+                    itemCount: bricks.length,
+                    itemBuilder: (context, index) {
+                      final brick = bricks[index];
+                      return Card(
+                        color: Colors.brown,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Center(
+                          child: Text(
+                            brick.title,
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 12,
+                            ),
+                          ),
+                        ),
+                      );
+                    },
                   ),
-                );
-              },
-            ),
+          ),
+        ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.add),
+        onPressed: () {
+          setState(() {
+            pyramid.addLayer();
+          });
+        },
+      ),
     );
   }
 }

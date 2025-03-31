@@ -39,6 +39,8 @@ dependencies:
   path_provider: ^2.1.5
   url_launcher: ^6.3.1
   shared_preferences: ^2.5.2
+  flutter_cube: ^0.1.1
+  vector_math: ^2.1.4
 
 dev_dependencies:
   flutter_test:
@@ -61,7 +63,8 @@ flutter:
   assets: 
     - assets/enemies/1_ORK/ATTAK/
     - assets/enemies/2_ORK/ATTAK/
-    - assets/enemies/3_ORK/ATTAK/  
+    - assets/enemies/3_ORK/ATTAK/
+    - assets/pyramid_model.obj
     # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
