@@ -205,7 +205,31 @@ class _SettingsScreen extends State<SettingsScreen> {
                       borderRadius: BorderRadius.circular(20)),
                 ),
                 onPressed: () {
-                  Provider.of<TaskDatabase>(context, listen: false).resetBricks();
+                      showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: Text("Reset pyramid bricks"),
+                        content: Text(
+                            "Are you sure you want to clear pyramid bricks?"),
+                        actions: [
+                          TextButton(
+                            onPressed: () =>
+                                Navigator.of(context).pop(), // ❌ Cancel
+                            child: Text("Cancel"),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                              Provider.of<TaskDatabase>(context, listen: false)
+                                  .resetBricks();
+                            },
+                            child: Text("Reset"),
+                          ),
+                        ],
+                      );
+                    },
+                  );
                 },
                 child: Text(
                   "RESET PYRAMID BRICKS",

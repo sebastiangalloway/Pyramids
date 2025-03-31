@@ -25,7 +25,7 @@ class _ProgressScreenState extends State<ProgressScreen> {
         children: [
           // Pyramid 3D widget section
           Container(
-            height: 500, // adjust this height as needed
+            height: 400, // adjust this height as needed
             alignment: Alignment.center,
             child: Pyramid3DView()
           ),
@@ -66,14 +66,7 @@ class _ProgressScreenState extends State<ProgressScreen> {
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.add),
-        onPressed: () {
-          setState(() {
-            pyramid.addLayer();
-          });
-        },
-      ),
+
     );
   }
 }
