@@ -16,6 +16,7 @@ Mark tasks as complete by replacing `[ ]` with `[x]`.
 - [ ] Implement AI-based suggestions for shifting emotional states
 - [ ] Implement self-care trackers & incentivizers
 - [ ] Gratitude list feature
+- [ ] 🧘‍♂️ Guided Meditation: Expanding Emotional Tolerance added in presence page
 - [ ] Website blocker for productivity
 - [ ] Chapter-GPT therapy wrapper with guided prompts
 - [ ] Implement procrastination checker & alerts
@@ -101,6 +102,9 @@ Mark tasks as complete by replacing `[ ]` with `[x]`.
   - [x] Tasks appear as **enemies**
   - [x] Completing tasks deals **damage**
   - [x] Killed tasks convert into **pyramid bricks**
+- [x] Allowed for pyramid bricks reset in settings
+- [x] Added placeholder for dyanmic pyramid model
+
 
 
 
