@@ -18,7 +18,7 @@ class _MainHomeScreenState extends State<MainHomeScreen> {
   int _selectedIndex = 0;
 
   final List<Widget> widgetOptions =  [
-    HomeScreen(),
+    // HomeScreen(),
     TaskScreen(),
     BattlefieldScreen(),
     MindfulnessScreen(),
@@ -54,10 +54,12 @@ class _MainHomeScreenState extends State<MainHomeScreen> {
         showUnselectedLabels: true,
         type: BottomNavigationBarType.fixed,
         items: const <BottomNavigationBarItem>[
+          /*
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',
           ),
+          */
           BottomNavigationBarItem(
             icon: Icon(Icons.check_circle_outline),
             label: 'Tasks',

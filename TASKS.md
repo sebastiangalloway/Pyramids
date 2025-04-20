@@ -104,6 +104,7 @@ Mark tasks as complete by replacing `[ ]` with `[x]`.
   - [x] Killed tasks convert into **pyramid bricks**
 - [x] Allowed for pyramid bricks reset in settings
 - [x] Added placeholder for dyanmic pyramid model
+- [x] Commented out homescreen as it doesnt really serve purpose for now
 
 
 
